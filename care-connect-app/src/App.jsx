@@ -1,6 +1,10 @@
 import { useState, React } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
+import Stock from "./Pages/Stock";
+import Notifications from "./Pages/Notifications";
+import Doctors from "./Pages/Doctors";
+
 import "./App.css";
 import { NewConsultation } from "./Pages/NewConsultation";
 import { NewPatient } from "./Pages/NewPatient";
@@ -19,6 +23,15 @@ function App() {
                     <li className="list-group-item">
                         <Link to="/home">Home</Link>
                     </li>
+                    <li className="list-group-item">
+                        <Link to="/stock">Consultas Stock</Link>
+                    </li>
+                    <li className="list-group-item">
+                        <Link to="/notifications">Notifications</Link>
+                    </li>
+                    <li className="list-group-item">
+                        <Link to="/doctors">Busqueda de Medicos</Link>
+                    </li>
                 </ul>
             </nav>
             <Routes>
@@ -29,6 +42,9 @@ function App() {
                     }
                 />
                 <Route path="/home" element={<Home />} />
+                <Route path="/stock" element={<Stock />} />
+                <Route path="/notifications" element={<Notifications />} />
+                <Route path="/doctors" element={<Doctors />} />
                 <Route
                     path="/home/new-consultation"
                     element={<NewConsultation />}
