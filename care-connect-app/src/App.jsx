@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import "./App.css";
-
+import { NewConsultation } from "./Pages/NewConsultation";
+import { NewPatient } from "./Pages/NewPatient";
 function App() {
     return (
         <>
@@ -28,6 +29,11 @@ function App() {
                     }
                 />
                 <Route path="/home" element={<Home />} />
+                <Route
+                    path="/home/new-consultation"
+                    element={<NewConsultation />}
+                />
+                <Route path="/home/new-patient" element={<NewPatient />} />
                 <Route path="*" element={<h1>404 Not Found</h1>} />
             </Routes>
         </>

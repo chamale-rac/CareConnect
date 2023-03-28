@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Container, Nav, Navbar, Table, Stack, Button } from "react-bootstrap";
 import CustomNavbar from "../Components/CustomNavbar.jsx";
+import { Link, Route, Routes } from "react-router-dom";
 import "../App.css";
 
 function Home() {
@@ -8,13 +9,18 @@ function Home() {
         <>
             <CustomNavbar />
             <Stack className="m-5" direction="horizontal" gap={3}>
-                <div className="bg-light border p-2">Name: Michio Kaku</div>
+                <div className="bg-light border p-2">Nombre: Michio Kaku</div>
+                <div className="bg-light border p-2">Unidad: The Care</div>
+                <div className="bg-light border p-2">Rol: Doctor</div>
                 <div className="bg-light border p-2">
-                    Medical Unit: The Care
+                    Especialidad: Cardiólogo
                 </div>
-                <div className="bg-light border p-2">Role: Doctor</div>
-                <div className="bg-light border p-2">Specialty: Cardiology</div>
-                <Button>Add Patient</Button>
+                <Link className="btn btn-primary" to="new-patient">
+                    Registrar Paciente
+                </Link>
+                <Link className="btn btn-primary" to="new-consultation">
+                    Agregar Consulta
+                </Link>
             </Stack>
             <div className="mx-5">
                 <Table striped bordered hover>
