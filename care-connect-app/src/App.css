@@ -1,1 +1,7 @@
 @import url("bootstrap/dist/css/bootstrap.min.css");
+@import url("https://fonts.cdnfonts.com/css/ibm-plex-sans-hebrew");
+
+* {
+    font-family: "IBM Plex Sans Hebrew", sans-serif;
+    border-radius: 0 !important;
+}

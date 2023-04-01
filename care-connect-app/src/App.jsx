@@ -6,8 +6,8 @@ import Notifications from "./Pages/Notifications";
 import Doctors from "./Pages/Doctors";
 
 import "./App.css";
-import { NewConsultation } from "./Pages/NewConsultation";
-import { NewPatient } from "./Pages/NewPatient";
+import { NewConsultation } from "./Pages/NewConsultation/NewConsultation";
+import { NewPatient } from "./Pages//NewPatient/NewPatient";
 function App() {
     return (
         <>

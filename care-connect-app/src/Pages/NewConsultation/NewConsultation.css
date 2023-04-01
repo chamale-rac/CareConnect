@@ -1,0 +1,11 @@
+.typehead * {
+    margin: 0;
+}
+
+.effective-dropdown > button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: medium;
+    font-weight: 400;
+}

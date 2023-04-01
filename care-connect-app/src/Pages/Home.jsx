@@ -1,10 +1,27 @@
-import { useState } from "react";
-import { Container, Nav, Navbar, Table, Stack, Button } from "react-bootstrap";
+import SearchIcon from "@mui/icons-material/Search";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Form, InputGroup, Stack, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import CustomNavbar from "../Components/CustomNavbar.jsx";
-import { Link, Route, Routes } from "react-router-dom";
+
 import "../App.css";
 
 function Home() {
+    const consultations = [
+        {
+            fecha: "2021-09-01",
+            unidad: "A",
+            paciente: "Johan Liebert",
+            prioridad: "Alta",
+        },
+        {
+            fecha: "2021-09-02",
+            unidad: "B",
+            paciente: "Johnny Joestar",
+            prioridad: "Baja",
+        },
+    ];
+
     return (
         <>
             <CustomNavbar />
@@ -15,6 +32,12 @@ function Home() {
                 <div className="bg-light border p-2">
                     Especialidad: Cardiólogo
                 </div>
+            </Stack>
+            <Stack
+                className="m-5 d-flex justify-content-center"
+                direction="horizontal"
+                gap={3}
+            >
                 <Link className="btn btn-primary" to="new-patient">
                     Registrar Paciente
                 </Link>
@@ -22,32 +45,35 @@ function Home() {
                     Agregar Consulta
                 </Link>
             </Stack>
-            <div className="mx-5">
+            <InputGroup className="mb-3 w-50 mx-auto">
+                <Form.Control
+                    placeholder="Search consultations"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                />
+                <InputGroup.Text id="basic-addon1">
+                    <SearchIcon></SearchIcon>
+                </InputGroup.Text>
+            </InputGroup>
+            <div className="mx-auto w-50">
                 <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>Fecha</th>
-                            <th>Medico</th>
                             <th>Unidad</th>
                             <th>Paciente</th>
-                            <th>Estado</th>
+                            <th>Prioridad</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Mr Bombastic</td>
-                            <td>Critico</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>Mr Fantastic</td>
-                            <td>Normal</td>
-                        </tr>
+                        {consultations.map((consultation) => (
+                            <tr>
+                                <td>{consultation.fecha}</td>
+                                <td>{consultation.unidad}</td>
+                                <td>{consultation.paciente}</td>
+                                <td>{consultation.prioridad}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </div>
