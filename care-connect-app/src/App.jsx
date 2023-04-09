@@ -8,12 +8,14 @@ import Landing from './Pages/Landing'
 import SignIn from './Pages/SignIn'
 import Login from './Pages/Login'
 
+import { UserProvider } from './context/UserContext'
+
 import './App.css'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
 import { NewPatient } from './Pages//NewPatient/NewPatient'
 function App() {
 	return (
-		<>
+		<UserProvider>
 			<nav>
 				<ul className="list-group">
 					<li className="list-group-item">
@@ -52,7 +54,7 @@ function App() {
 				<Route path="/home/new-patient" element={<NewPatient />} />
 				<Route path="*" element={<h1>404 Not Found</h1>} />
 			</Routes>
-		</>
+		</UserProvider>
 	)
 }
 

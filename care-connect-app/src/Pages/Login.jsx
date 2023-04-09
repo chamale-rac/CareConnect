@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { API_URL } from '../../config'
 
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
 
 const Login = () => {
+	const [currentUser, setCurrentUser] = useContext(UserContext)
+
 	const navigate = useNavigate()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -35,8 +38,9 @@ const Login = () => {
 			}
 
 			const data = await response.json()
-			console.log(data)
+			console.log({ name: data.nombre, id: data.id })
 			// handle successful response
+			setCurrentUser({ name: data.nombre, id: data.id })
 			navigate('/')
 		} catch (error) {
 			console.error(error)
