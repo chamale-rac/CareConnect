@@ -76,7 +76,6 @@ function SignIn() {
 			.catch((error) => {
 				console.log(error)
 				// handle error
-				const errorMessage = 'Hubo un error al registrar el médico.'
 				setError(
 					'Hubo un error al registrarte. Probablemente el correo ya está en uso.',
 				)
