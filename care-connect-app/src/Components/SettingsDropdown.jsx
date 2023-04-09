@@ -12,7 +12,9 @@ const SettingsDropdown = () => {
 
 			<Dropdown.Menu>
 				<Dropdown.Item onClick={logout}>Log Out</Dropdown.Item>
-				<Dropdown.Item href="#/action-2">About the app</Dropdown.Item>
+				<Dropdown.Item href="https://github.com/chamale-rac/CareConnect">
+					About the app
+				</Dropdown.Item>
 			</Dropdown.Menu>
 		</Dropdown>
 	)
