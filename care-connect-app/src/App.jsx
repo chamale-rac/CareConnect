@@ -5,6 +5,7 @@ import Stock from './Pages/Stock'
 import Notifications from './Pages/Notifications'
 import Doctors from './Pages/Doctors'
 import Landing from './Pages/Landing'
+import SignIn from './Pages/SignIn'
 
 import './App.css'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
@@ -37,7 +38,7 @@ function App() {
 			</nav>
 			<Routes>
 				<Route path="/" element={<Landing />} />
-				<Route path="/signin" element={<h3>signin</h3>} />
+				<Route path="/signin" element={<SignIn />} />
 				<Route path="/login" element={<h3>login</h3>} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/stock" element={<Stock />} />

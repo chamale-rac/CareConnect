@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { Container, Form, Row, Col, Button, Alert } from 'react-bootstrap'
 
+import { useNavigate } from 'react-router-dom'
 import { API_URL } from '../../config'
 
 function SignIn() {
+	const navigate = useNavigate()
+
 	const [correo, setCorreo] = useState('')
 	const [contraseña, setContraseña] = useState('')
 	const [nombre, setNombre] = useState('')
@@ -67,6 +71,7 @@ function SignIn() {
 			.then((data) => {
 				console.log(data)
 				// handle successful response
+				navigate('/login')
 			})
 			.catch((error) => {
 				console.log(error)
@@ -79,71 +84,76 @@ function SignIn() {
 	}
 
 	return (
-		<div>
+		<Container>
 			<h1>Sign Up</h1>
-			{error && <p>{error}</p>}
-			<form onSubmit={handleSubmit}>
-				<label>
-					Correo:
-					<input
+			{error && <Alert variant="danger">{error}</Alert>}
+			<Form onSubmit={handleSubmit}>
+				<Form.Group controlId="formBasicEmail">
+					<Form.Label>Email address</Form.Label>
+					<Form.Control
 						type="email"
+						placeholder="Enter email"
 						value={correo}
 						onChange={(e) => setCorreo(e.target.value)}
 						required
 					/>
-				</label>
-				<br />
-				<label>
-					Contraseña:
-					<input
+				</Form.Group>
+
+				<Form.Group controlId="formBasicPassword">
+					<Form.Label>Password</Form.Label>
+					<Form.Control
 						type="password"
+						placeholder="Password"
 						value={contraseña}
 						onChange={(e) => setContraseña(e.target.value)}
 						required
 					/>
-				</label>
-				<br />
-				<label>
-					Nombre:
-					<input
+				</Form.Group>
+
+				<Form.Group controlId="formBasicName">
+					<Form.Label>Name</Form.Label>
+					<Form.Control
 						type="text"
+						placeholder="Enter your name"
 						value={nombre}
 						onChange={(e) => setNombre(e.target.value)}
 						required
 					/>
-				</label>
-				<br />
-				<label>
-					Dirección:
-					<input
+				</Form.Group>
+
+				<Form.Group controlId="formBasicAddress">
+					<Form.Label>Address</Form.Label>
+					<Form.Control
 						type="text"
+						placeholder="Enter your address"
 						value={direccion}
 						onChange={(e) => setDireccion(e.target.value)}
 						required
 					/>
-				</label>
-				<br />
-				<label>
-					Número de teléfono:
-					<input
+				</Form.Group>
+
+				<Form.Group controlId="formBasicPhone">
+					<Form.Label>Phone number</Form.Label>
+					<Form.Control
 						type="tel"
+						placeholder="Enter your phone number"
 						value={numTelefono}
 						onChange={(e) => setNumTelefono(e.target.value)}
 						required
 					/>
-				</label>
-				<br />
-				<label>
-					ID de especialidad médica:
-					<select
+				</Form.Group>
+
+				<Form.Group controlId="formBasicSpecialty">
+					<Form.Label>Medical specialty ID</Form.Label>
+					<Form.Control
+						as="select"
 						value={idEspecialidadMedica}
 						onChange={(e) =>
 							setIdEspecialidadMedica(e.target.value)
 						}
 						required
 					>
-						<option value="">Seleccione una opción</option>
-						{/* map over the especialidades array to create an option for each item */}
+						<option value="">Select an option</option>
 						{especialidades.map((especialidad) => (
 							<option
 								key={especialidad[0]}
@@ -152,29 +162,31 @@ function SignIn() {
 								{especialidad[1]}
 							</option>
 						))}
-					</select>
-				</label>
-				<br />
-				<label>
-					ID de instalación médica:
-					<select
+					</Form.Control>
+				</Form.Group>
+
+				<Form.Group controlId="formBasicFacility">
+					<Form.Label>Medical facility ID</Form.Label>
+					<Form.Control
+						as="select"
 						value={idInstalacionMedica}
 						onChange={(e) => setIdInstalacionMedica(e.target.value)}
 						required
 					>
-						<option value="">Seleccione una opción</option>
-						{/* map over the instalaciones array to create an option for each item */}
+						<option value="">Select an option</option>
 						{instalaciones.map((instalacion) => (
 							<option key={instalacion[0]} value={instalacion[0]}>
 								{instalacion[1]}
 							</option>
 						))}
-					</select>
-				</label>
-				<br />
-				<button type="submit">Registrarse</button>
-			</form>
-		</div>
+					</Form.Control>
+				</Form.Group>
+
+				<Button variant="primary" type="submit">
+					Register
+				</Button>
+			</Form>
+		</Container>
 	)
 }
 
