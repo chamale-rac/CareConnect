@@ -1,8 +1,9 @@
-import React from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import SettingsIcon from "@mui/icons-material/Settings";
-
+import React, { useContext } from 'react'
+import Dropdown from 'react-bootstrap/Dropdown'
+import SettingsIcon from '@mui/icons-material/Settings'
+import { UserContext } from '../context/UserContext'
 const SettingsDropdown = () => {
+	const { logout } = useContext(UserContext)
 	return (
 		<Dropdown>
 			<Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -10,11 +11,11 @@ const SettingsDropdown = () => {
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu>
-				<Dropdown.Item href="#/action-1">Sign Out</Dropdown.Item>
+				<Dropdown.Item onClick={logout}>Log Out</Dropdown.Item>
 				<Dropdown.Item href="#/action-2">About the app</Dropdown.Item>
 			</Dropdown.Menu>
 		</Dropdown>
-	);
-};
+	)
+}
 
-export default SettingsDropdown;
+export default SettingsDropdown

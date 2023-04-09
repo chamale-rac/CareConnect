@@ -49,7 +49,10 @@ const Login = () => {
 	}
 
 	return (
-		<Container>
+		<Container
+			className="d-flex flex-column justify-content-center"
+			style={{ height: '100vh' }}
+		>
 			<h1>Login</h1>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
@@ -75,7 +78,7 @@ const Login = () => {
 					/>
 				</Form.Group>
 
-				<Button variant="primary" type="submit">
+				<Button className={'mt-3'} variant="primary" type="submit">
 					Login
 				</Button>
 			</Form>

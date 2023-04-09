@@ -10,11 +10,13 @@ const Landing = () => {
 			className="d-flex flex-column align-items-center justify-content-center"
 			style={{ height: '100vh' }}
 		>
-			<h1>CareConnect</h1>
-			<h1>
-				{currentUser && <p>Welcome, {currentUser.name}!</p>}
-				{!currentUser && <p>Please log in.</p>}
-			</h1>
+			<img
+				width="150"
+				height="150"
+				src="https://lh3.googleusercontent.com/pw/AMWts8CFnYSqecCJJMYLZbPxhqd5NAMs0AeD9WHO2ysOhOl7SQjumseGYuEvOhyWICi-hY_4C2YsUej1bpMR9tKKu2krgHYmWG1q54CGtvEExLJ1AVDvlW0mY_aN-A9BYw9VxGll3Mc2ls7QfSEa-PLbtb-n=w500-h500-s-no?authuser=0"
+				alt="Logo Image"
+			/>
+			<h1 className="mt-4">CareConnect</h1>
 			<div className="mt-4">
 				<Button variant="primary" className="me-3">
 					<Link
@@ -31,9 +33,6 @@ const Landing = () => {
 					>
 						SignIn
 					</Link>
-				</Button>
-				<Button onClick={logout} variant="secondary">
-					Logout
 				</Button>
 			</div>
 		</Container>

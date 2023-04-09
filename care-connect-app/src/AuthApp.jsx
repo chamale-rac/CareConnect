@@ -22,10 +22,7 @@ const AuthApp = () => {
 						re-render
 					</li>
 					<li className="list-group-item">
-						<Link to="/">Landing</Link>
-					</li>
-					<li className="list-group-item">
-						<Link to="/home">Home</Link>
+						<Link to="/">Home</Link>
 					</li>
 					<li className="list-group-item">
 						<Link to="/stock">Consultas Stock</Link>
@@ -39,10 +36,9 @@ const AuthApp = () => {
 				</ul>
 			</nav>
 			<Routes>
-				<Route path="/" element={<Landing />} />
+				<Route path="/" element={<Home />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/home" element={<Home />} />
 				<Route path="/stock" element={<Stock />} />
 				<Route path="/notifications" element={<Notifications />} />
 				<Route path="/doctors" element={<Doctors />} />

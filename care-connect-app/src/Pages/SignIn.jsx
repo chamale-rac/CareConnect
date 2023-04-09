@@ -83,7 +83,10 @@ function SignIn() {
 	}
 
 	return (
-		<Container>
+		<Container
+			className="d-flex flex-column justify-content-center"
+			style={{ height: '100vh' }}
+		>
 			<h1>Sign Up</h1>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
@@ -181,7 +184,7 @@ function SignIn() {
 					</Form.Control>
 				</Form.Group>
 
-				<Button variant="primary" type="submit">
+				<Button className={'mt-3'} variant="primary" type="submit">
 					Register
 				</Button>
 			</Form>
