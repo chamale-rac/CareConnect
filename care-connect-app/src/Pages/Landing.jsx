@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Landing = () => {
-	const [currentUser, setCurrentUser] = useContext(UserContext)
+	const { currentUser } = useContext(UserContext)
 	return (
 		<Container
 			className="d-flex flex-column align-items-center justify-content-center"

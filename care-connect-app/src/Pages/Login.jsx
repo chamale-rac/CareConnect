@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Login = () => {
-	const [currentUser, setCurrentUser] = useContext(UserContext)
+	const { login } = useContext(UserContext)
 
 	const navigate = useNavigate()
 	const [email, setEmail] = useState('')
@@ -40,7 +40,9 @@ const Login = () => {
 			const data = await response.json()
 			console.log({ name: data.nombre, id: data.id })
 			// handle successful response
-			setCurrentUser({ name: data.nombre, id: data.id })
+			localStorage.setItem('id', data.nombre)
+
+			login({ name: data.nombre, id: data.id })
 			navigate('/')
 		} catch (error) {
 			console.error(error)
