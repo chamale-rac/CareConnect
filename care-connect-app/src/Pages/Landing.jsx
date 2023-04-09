@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Landing = () => {
-	const { currentUser } = useContext(UserContext)
+	const { currentUser, logout } = useContext(UserContext)
 	return (
 		<Container
 			className="d-flex flex-column align-items-center justify-content-center"
@@ -31,6 +31,9 @@ const Landing = () => {
 					>
 						SignIn
 					</Link>
+				</Button>
+				<Button onClick={logout} variant="secondary">
+					Logout
 				</Button>
 			</div>
 		</Container>

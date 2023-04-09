@@ -40,8 +40,6 @@ const Login = () => {
 			const data = await response.json()
 			console.log({ name: data.nombre, id: data.id })
 			// handle successful response
-			localStorage.setItem('id', data.nombre)
-
 			login({ name: data.nombre, id: data.id })
 			navigate('/')
 		} catch (error) {
