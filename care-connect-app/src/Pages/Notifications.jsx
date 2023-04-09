@@ -1,28 +1,28 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { Notifications } from "@mui/icons-material";
-import { List, ListItem, ListItemText, Box, Button } from "@mui/material";
+import React from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Notifications } from '@mui/icons-material'
+import { List, ListItem, ListItemText, Box, Button } from '@mui/material'
 
 function NotificationsPage() {
 	// Replace this with actual data
 	const notifications = [
 		{
 			id: 1,
-			title: "New message from John",
-			content: "Hi, how are you doing?",
+			title: 'New message from John',
+			content: 'Hi, how are you doing?',
 		},
 		{
 			id: 2,
-			title: "New order received",
+			title: 'New order received',
 			content:
-				"Order #123456 has been received and is ready to be processed.",
+				'Order #123456 has been received and is ready to be processed.',
 		},
 		{
 			id: 3,
-			title: "Inventory update",
-			content: "The stock of Product X has been updated to 50 units.",
+			title: 'Inventory update',
+			content: 'The stock of Product X has been updated to 50 units.',
 		},
-	];
+	]
 
 	return (
 		<Container>
@@ -56,7 +56,7 @@ function NotificationsPage() {
 				</Col>
 			</Row>
 		</Container>
-	);
+	)
 }
 
-export default NotificationsPage;
+export default NotificationsPage
