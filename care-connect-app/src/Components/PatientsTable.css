@@ -1,0 +1,20 @@
+.patients-table {
+    cursor: pointer;
+    pointer-events: none;
+}
+.patients-table > tbody > tr {
+    pointer-events: auto;
+    transition: 0.1s;
+}
+
+.patients-table > tbody > tr:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.patients-table > tbody > tr.selected:hover {
+    filter: none;
+}
+.patients-table > tbody > tr.selected {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(23, 23, 189, 0.137) 0px 7px 24px 0px;
+}

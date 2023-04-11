@@ -52,171 +52,177 @@ export function NewConsultation() {
     return (
         <>
             <CustomNavbar />
-            <Container className="patient-container mt-4">
-                <Form>
-                    <Button variant="secondary " onClick={handleBackClick}>
-                        <ArrowBackIcon />
-                    </Button>
+            <div className="consultation-bg">
+                <Container className="new-consultation patient-container ">
+                    <Form>
+                        <Button
+                            variant="secondary "
+                            className="mt-3"
+                            onClick={handleBackClick}
+                        >
+                            <ArrowBackIcon />
+                        </Button>
 
-                    <ConsultationForm
-                        patients={patients}
-                        selectedPatient={selectedPatient}
-                        handleSelect={handleSelect}
-                        setDate={setDate}
-                        session={currentSession}
-                    />
-                    <section>
-                        <h3 className="my-4">
-                            <NotesTwoToneIcon /> Bitácora de Consulta
-                        </h3>
-                        <Row>
-                            <Col>
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                        ID del Paciente
-                                    </InputGroup.Text>
-                                    <FormControl
-                                        aria-label="Default"
-                                        disabled
-                                        placeholder={selectedPatient?.id}
-                                    />
-                                </InputGroup>
-                            </Col>
-                            <Col className="col-8">
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                        Nombre del Paciente
-                                    </InputGroup.Text>
-                                    <FormControl
-                                        aria-label="Default"
-                                        aria-describedby="inputGroup-sizing-default"
-                                        disabled
-                                        placeholder={selectedPatient?.name}
-                                    />
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <FormGroup>
-                                    <InputGroup className="mb-1">
+                        <ConsultationForm
+                            patients={patients}
+                            selectedPatient={selectedPatient}
+                            handleSelect={handleSelect}
+                            setDate={setDate}
+                            session={currentSession}
+                        />
+                        <section>
+                            <h3 className="my-4">
+                                <NotesTwoToneIcon /> Bitácora de Consulta
+                            </h3>
+                            <Row>
+                                <Col>
+                                    <InputGroup className="mb-3">
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            Presión Arterial
+                                            ID del Paciente
                                         </InputGroup.Text>
                                         <FormControl
-                                            placeholder="ej. '80/120'"
+                                            aria-label="Default"
+                                            disabled
+                                            placeholder={selectedPatient?.id}
+                                        />
+                                    </InputGroup>
+                                </Col>
+                                <Col className="col-8">
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            Nombre del Paciente
+                                        </InputGroup.Text>
+                                        <FormControl
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default"
+                                            disabled
+                                            placeholder={selectedPatient?.name}
+                                        />
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <FormGroup>
+                                        <InputGroup className="mb-1">
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                Presión Arterial
+                                            </InputGroup.Text>
+                                            <FormControl
+                                                placeholder="ej. '80/120'"
+                                                aria-label="Default"
+                                                type="text"
+                                            />
+                                        </InputGroup>
+                                    </FormGroup>
+                                </Col>
+                                <Col className="col">
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            Peso (kg)
+                                        </InputGroup.Text>
+                                        <FormControl
+                                            aria-label="Default"
+                                            type="number"
+                                            aria-describedby="inputGroup-sizing-default"
+                                        />
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            Expediente
+                                        </InputGroup.Text>
+                                        <FormControl
+                                            as="textarea"
                                             aria-label="Default"
                                             type="text"
                                         />
                                     </InputGroup>
-                                </FormGroup>
-                            </Col>
-                            <Col className="col">
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                        Peso (kg)
-                                    </InputGroup.Text>
-                                    <FormControl
-                                        aria-label="Default"
-                                        type="number"
-                                        aria-describedby="inputGroup-sizing-default"
-                                    />
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                        Expediente
-                                    </InputGroup.Text>
-                                    <FormControl
-                                        as="textarea"
-                                        aria-label="Default"
-                                        type="text"
-                                    />
-                                </InputGroup>
-                                <InputGroup className="mb-3">
-                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                        Diagnóstico Preliminar
-                                    </InputGroup.Text>
-                                    <FormControl
-                                        as="textarea"
-                                        aria-label="Default"
-                                        type="text"
-                                    />
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                    </section>
+                                    <InputGroup className="mb-3">
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            Diagnóstico Preliminar
+                                        </InputGroup.Text>
+                                        <FormControl
+                                            as="textarea"
+                                            aria-label="Default"
+                                            type="text"
+                                        />
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                        </section>
 
-                    {/* Additional Forms */}
-                    <div className="border p-2">
-                        <h3>Tratamiento</h3>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text id="inputGroup-sizing-default">
-                                Descripción general
-                            </InputGroup.Text>
-                            <FormControl
-                                as="textarea"
-                                aria-label="Default"
-                                type="text"
+                        {/* Additional Forms */}
+                        <div className="border p-2">
+                            <h3>Tratamiento</h3>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Text id="inputGroup-sizing-default">
+                                    Descripción general
+                                </InputGroup.Text>
+                                <FormControl
+                                    as="textarea"
+                                    aria-label="Default"
+                                    type="text"
+                                />
+                            </InputGroup>
+                            <ItemForm
+                                title="Pruebas Diagnósticas"
+                                icon="ScienceTwoToneIcon"
+                                items={testsItemForm}
+                                setItemForm={setTestsItemForm}
                             />
-                        </InputGroup>
-                        <ItemForm
-                            title="Pruebas Diagnósticas"
-                            icon="ScienceTwoToneIcon"
-                            items={testsItemForm}
-                            setItemForm={setTestsItemForm}
-                        />
 
-                        <ItemForm
-                            title="Medicamentos"
-                            icon="HealingTwoToneIcon"
-                            items={medicineItemForm}
-                            setItemForm={setMedicineItemForm}
-                        />
+                            <ItemForm
+                                title="Medicamentos"
+                                icon="HealingTwoToneIcon"
+                                items={medicineItemForm}
+                                setItemForm={setMedicineItemForm}
+                            />
 
-                        <ItemForm
-                            title="Procedimientos"
-                            icon="VaccinesTwoToneIcon"
-                            items={procedureItemForm}
-                            setItemForm={setProcedureItemForm}
-                        />
-                        <div className="d-flex justify-content-center">
-                            <DropdownButton
-                                id="dropdown-item-button"
-                                title={
-                                    treatmentEfficacy === ""
-                                        ? "Eficacia del tratamiento anterior"
-                                        : treatmentEfficacy
-                                }
-                                className="effective-dropdown"
-                            >
-                                {treatmentEfficacyOptions.map((item) => (
-                                    <Dropdown.Item
-                                        key={item}
-                                        onClick={() =>
-                                            setTreatmentEfficacy(item)
-                                        }
-                                    >
-                                        {item}
-                                    </Dropdown.Item>
-                                ))}
-                            </DropdownButton>
+                            <ItemForm
+                                title="Procedimientos"
+                                icon="VaccinesTwoToneIcon"
+                                items={procedureItemForm}
+                                setItemForm={setProcedureItemForm}
+                            />
+                            <div className="d-flex justify-content-center">
+                                <DropdownButton
+                                    id="dropdown-item-button"
+                                    title={
+                                        treatmentEfficacy === ""
+                                            ? "Eficacia del tratamiento anterior"
+                                            : treatmentEfficacy
+                                    }
+                                    className="effective-dropdown"
+                                >
+                                    {treatmentEfficacyOptions.map((item) => (
+                                        <Dropdown.Item
+                                            key={item}
+                                            onClick={() =>
+                                                setTreatmentEfficacy(item)
+                                            }
+                                        >
+                                            {item}
+                                        </Dropdown.Item>
+                                    ))}
+                                </DropdownButton>
+                            </div>
                         </div>
-                    </div>
 
-                    <FormGroup
-                        className="mb-3 mt-3 d-flex justify-content-center"
-                        controlId="submit"
-                    >
-                        <Button variant="primary" type="submit">
-                            Añadir consulta
-                        </Button>
-                    </FormGroup>
-                </Form>
-            </Container>
+                        <FormGroup
+                            className="mt-3 pb-3 d-flex justify-content-end"
+                            controlId="submit"
+                        >
+                            <Button variant="primary" type="submit">
+                                Añadir consulta
+                            </Button>
+                        </FormGroup>
+                    </Form>
+                </Container>
+            </div>
         </>
     );
 }

@@ -8,6 +8,7 @@ import Doctors from "./Pages/Doctors";
 import "./App.css";
 import { NewConsultation } from "./Pages/NewConsultation/NewConsultation";
 import { NewPatient } from "./Pages//NewPatient/NewPatient";
+import ManagePatient from "./Pages/ManagePatient/ManagePatient";
 function App() {
     return (
         <>
@@ -48,6 +49,10 @@ function App() {
                 <Route
                     path="/home/new-consultation"
                     element={<NewConsultation />}
+                />
+                <Route
+                    path="/home/manage-patient"
+                    element={<ManagePatient />}
                 />
                 <Route path="/home/new-patient" element={<NewPatient />} />
                 <Route path="*" element={<h1>404 Not Found</h1>} />

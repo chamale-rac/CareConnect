@@ -22,16 +22,25 @@ function Home() {
         },
     ];
 
+    const currentUser = {
+        nombre: "Michio Kaku",
+        unidad: "The Care",
+        rol: "Doctor",
+        especialidad: "Cardiólogo",
+    };
+
     return (
         <>
             <CustomNavbar />
             <Stack className="m-5" direction="horizontal" gap={3}>
-                <div className="bg-light border p-2">Nombre: Michio Kaku</div>
-                <div className="bg-light border p-2">Unidad: The Care</div>
-                <div className="bg-light border p-2">Rol: Doctor</div>
-                <div className="bg-light border p-2">
-                    Especialidad: Cardiólogo
-                </div>
+                {Object.entries(currentUser).map(([k, v]) => {
+                    return (
+                        <div className="bg-light border p-2">
+                            {<b>{k.charAt(0).toUpperCase() + k.slice(1)}</b>}:{" "}
+                            {v}
+                        </div>
+                    );
+                })}
             </Stack>
             <Stack
                 className="m-5 d-flex justify-content-center"
@@ -43,6 +52,9 @@ function Home() {
                 </Link>
                 <Link className="btn btn-primary" to="new-consultation">
                     Agregar Consulta
+                </Link>
+                <Link className="btn btn-primary" to="manage-patient">
+                    Gestionar Pacientes
                 </Link>
             </Stack>
             <InputGroup className="mb-3 w-50 mx-auto">
