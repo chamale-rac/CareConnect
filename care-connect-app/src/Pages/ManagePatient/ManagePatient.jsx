@@ -6,7 +6,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "/src/App.css";
 import "./ManagePatient.css";
 
-export default function ManagePatient() {
+export function ManagePatient() {
     const navigate = useNavigate();
     const handleBackClick = () => {
         navigate("/home");

@@ -10,7 +10,7 @@ export function NewPatient(props) {
     const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate("/home");
+        navigate("/");
     };
 
     return (

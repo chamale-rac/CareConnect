@@ -17,7 +17,7 @@ import ItemForm from "/src/Components/Forms/ItemForm.jsx";
 export function NewConsultation() {
     const navigate = useNavigate();
     const handleBackClick = () => {
-        navigate("/home");
+        navigate("/");
     };
 
     const [testsItemForm, setTestsItemForm] = useState([]);
