@@ -1,6 +1,7 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NotesTwoToneIcon from "@mui/icons-material/NotesTwoTone";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import { Button, FormControl, FormGroup, InputGroup } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -20,6 +21,8 @@ export function NewConsultation() {
         navigate("/");
     };
 
+    const { userDetails } = useContext(UserContext);
+    console.log(userDetails);
     const [testsItemForm, setTestsItemForm] = useState([]);
     const [medicineItemForm, setMedicineItemForm] = useState([]);
     const [procedureItemForm, setProcedureItemForm] = useState([]);
@@ -28,8 +31,8 @@ export function NewConsultation() {
     const [date, setDate] = useState();
 
     const [currentSession, setCurrentSession] = useState({
-        doctor: "Michio Kaku",
-        center: "The Care",
+        doctor: userDetails.nombre,
+        center: userDetails.unidad,
     });
 
     const patients = [

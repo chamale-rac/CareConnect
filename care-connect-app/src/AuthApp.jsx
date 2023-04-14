@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserProvider } from "./context/UserContext";
 
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
@@ -44,20 +45,25 @@ const AuthApp = () => {
                     </li>
                 </ul>
             </nav>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/stock" element={<Stock />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/doctors" element={<Doctors />} />
-                <Route path="/new-consultation" element={<NewConsultation />} />
-                <Route path="/new-patient" element={<NewPatient />} />
-                <Route path="/add-product" element={<AddProduct />} />
-                <Route path="/manage-stock" element={<ManageStock />} />
-                <Route path="/manage-patient" element={<ManagePatient />} />
-                <Route path="*" element={<h1>404 Not Found</h1>} />
-            </Routes>
+            <UserProvider>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/stock" element={<Stock />} />
+                    <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/doctors" element={<Doctors />} />
+                    <Route
+                        path="/new-consultation"
+                        element={<NewConsultation />}
+                    />
+                    <Route path="/new-patient" element={<NewPatient />} />
+                    <Route path="/add-product" element={<AddProduct />} />
+                    <Route path="/manage-stock" element={<ManageStock />} />
+                    <Route path="/manage-patient" element={<ManagePatient />} />
+                    <Route path="*" element={<h1>404 Not Found</h1>} />
+                </Routes>
+            </UserProvider>
         </>
     );
 };
