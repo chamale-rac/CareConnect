@@ -16,7 +16,7 @@ const AuthApp = () => {
 		<>
 			<nav>
 				<ul className="list-group">
-					AUTH APP
+					AUTH APP: DOCTOR
 					<li className="list-group-item">
 						This is supposed to be the navbar cause it doesnt
 						re-render
@@ -33,6 +33,7 @@ const AuthApp = () => {
 					<li className="list-group-item">
 						<Link to="/doctors">Busqueda de Medicos</Link>
 					</li>
+					<li className="list-group-item"></li>
 				</ul>
 			</nav>
 			<Routes>
@@ -46,6 +47,7 @@ const AuthApp = () => {
 					path="/home/new-consultation"
 					element={<NewConsultation />}
 				/>
+				<Route path="/home/new-patient/:id"></Route>
 				<Route path="/home/new-patient" element={<NewPatient />} />
 				<Route path="*" element={<h1>404 Not Found</h1>} />
 			</Routes>
