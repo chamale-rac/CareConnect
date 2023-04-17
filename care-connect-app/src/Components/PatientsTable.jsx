@@ -16,16 +16,17 @@ export function PatientsTable({ patients, setSelectedPatient }) {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
                 </tr>
             </thead>
             <tbody>
-                {patients.map((patient) => (
+                {patients.map((patient, Index) => (
                     <tr
-                        key={patient.id}
+                        key={Index}
                         onClick={() => handleRowClick(patient)}
                         className={
                             activeRow && activeRow.id === patient.id
@@ -35,9 +36,11 @@ export function PatientsTable({ patients, setSelectedPatient }) {
                     >
                         <td>{patient.id}</td>
                         <td>{patient.name}</td>
-                        <td>{patient.age}</td>
+                        <td>{patient.surname}</td>
+                        <td>{patient.email}</td>
                         <td>{patient.phone}</td>
                         <td>{patient.address}</td>
+                        
                     </tr>
                 ))}
             </tbody>
