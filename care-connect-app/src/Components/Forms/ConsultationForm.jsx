@@ -8,6 +8,7 @@ export default function ConsultationForm({
     handleSelect,
     setDate,
     session,
+    patientsLoading,
 }) {
     return (
         <>
@@ -18,9 +19,13 @@ export default function ConsultationForm({
                     <Typeahead
                         id="my-dropdown"
                         className="typehead"
-                        options={patients}
+                        options={patientsLoading ? [["Loading..."]] : patients}
                         placeholder="Paciente"
-                        labelKey={(patient) => `${patient.name}`}
+                        labelKey={
+                            patientsLoading
+                                ? [["Loading..."]]
+                                : (patients) => `${patients.name} `
+                        }
                         selected={selectedPatient ? [selectedPatient] : []}
                         onChange={handleSelect}
                     />

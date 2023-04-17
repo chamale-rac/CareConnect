@@ -1,8 +1,14 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NotesTwoToneIcon from "@mui/icons-material/NotesTwoTone";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import { Button, FormControl, FormGroup, InputGroup } from "react-bootstrap";
+import {
+    Button,
+    FormControl,
+    FormGroup,
+    InputGroup,
+    Alert,
+} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -14,6 +20,8 @@ import CustomNavbar from "../../Components/CustomNavbar";
 import ConsultationForm from "../../Components/Forms/ConsultationForm";
 import "./NewConsultation.css";
 import ItemForm from "/src/Components/Forms/ItemForm.jsx";
+import { API_URL } from "/config.js";
+import { ListItemSecondaryAction } from "@mui/material";
 
 export function NewConsultation() {
     const navigate = useNavigate();
@@ -21,43 +29,169 @@ export function NewConsultation() {
         navigate("/");
     };
 
-    const { userDetails } = useContext(UserContext);
-    console.log(userDetails);
-    const [testsItemForm, setTestsItemForm] = useState([]);
-    const [medicineItemForm, setMedicineItemForm] = useState([]);
-    const [procedureItemForm, setProcedureItemForm] = useState([]);
-    const [treatmentEfficacy, setTreatmentEfficacy] = useState("");
+    const { userDetails, currentUser } = useContext(UserContext);
+
+    /* Consulta (id paciente, id instalacion, id medico ) */
     const [selectedPatient, setSelectedPatient] = useState(null);
-    const [date, setDate] = useState();
+
+    const [bloodPressure, setBloodPressure] = useState("");
+    const [weight, setWeight] = useState("");
+    const [record, setRecord] = useState("");
+    const [diagnosis, setDiagnosis] = useState("");
+
+    const handleTestSelect = (selectedItem) => {
+        setSelectedTest(selectedItem[0]);
+    };
+
+    const handleMedicineSelect = (selectedItem) => {
+        setSelectedMedicine(selectedItem[0]);
+    };
+
+    const handleProcedureSelect = (selectedItem) => {
+        setSelectedProcedure(selectedItem[0]);
+    };
+
+    const [testsItemForm, setTestsItemForm] = useState([]);
+    const [selectedTest, setSelectedTest] = useState(null);
+    const [testOptions, setTestOptions] = useState([]);
+
+    const [medicineItemForm, setMedicineItemForm] = useState([]);
+    const [selectedMedicine, setSelectedMedicine] = useState(null);
+    const [medicineOptions, setMedicineOptions] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API_URL}/stock?id_instalacion_medica=${userDetails.unidad}`)
+            .then((response) => response.json())
+            .then((data) => setMedicineOptions(data))
+            .catch((error) => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        fetch(
+            `${API_URL}/procedimientos?id_instalacion_medica=${userDetails.unidad}`
+        )
+            .then((response) => response.json())
+            .then((data) => setProcedureOptions(data))
+            .catch((error) => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        fetch(
+            `${API_URL}/pruebas-diagnosticas?id_instalacion_medica=${userDetails.unidad}`
+        )
+            .then((response) => response.json())
+            .then((data) => setTestOptions(data))
+            .catch((error) => console.log(error));
+    }, []);
+
+    const [procedureItemForm, setProcedureItemForm] = useState([]);
+    const [selectedProcedure, setSelectedProcedure] = useState(null);
+    const [procedureOptions, setProcedureOptions] = useState([]);
+
+    const [treatmentEfficacy, setTreatmentEfficacy] = useState({
+        def: "",
+        val: 5,
+    });
 
     const [currentSession, setCurrentSession] = useState({
         doctor: userDetails.nombre,
         center: userDetails.unidad,
     });
 
-    const patients = [
-        { name: "Johan Liebert", id: 1 },
-        { name: "Johnny Joestar", id: 2 },
-    ];
+    const [patients, setPatients] = useState([]);
+    const [patientsLoading, setPatientsLoading] = useState(true);
 
+    useEffect(() => {
+        fetch(`${API_URL}/pacientes`, { mode: "cors" })
+            .then((response) => response.json())
+            .then((data) => {
+                const formattedData = data.map((patient) => ({
+                    id: patient[0],
+                    name: patient[1],
+                }));
+                setPatients(formattedData);
+                setPatientsLoading(false);
+            })
+            .catch((error) => console.error(error));
+    }, []);
+
+    const [date, setDate] = useState("");
     const treatmentEfficacyOptions = [
-        "No Aplica",
-        "Mejoría",
-        "Estable",
-        "Empeoramiento",
-        "Paciente difunto",
+        { def: "No Aplica", val: 4 },
+        { def: "Mejoría", val: 3 },
+        { def: "Estable", val: 2 },
+        { def: "Empeoramiento", val: 1 },
+        { def: "Paciente difunto", val: 0 },
     ];
 
     const handleSelect = (selected) => {
         setSelectedPatient(selected[0]);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        newConsultation();
+    };
+
+    const [show, setShow] = useState(false);
+    const newConsultation = () => {
+        const consultation = {
+            consulta: {
+                idPaciente: selectedPatient.id,
+                idInstalacion: userDetails.unidad,
+                idMedico: currentUser.id,
+            },
+            bitacora: {
+                presion: bloodPressure,
+                peso: weight,
+                expediente: record,
+                diagnostico: diagnosis,
+                eficaciaTratamiento: treatmentEfficacy.val,
+            },
+            pruebas: testsItemForm.map((test) => ({
+                idPrueba: test.id,
+                nombrePrueba: test.name,
+            })),
+            medicamentos: medicineItemForm.map((medicine) => ({
+                idMedicamento: medicine.id,
+                nombreMedicamento: medicine.name,
+                cantidad: medicine.quantity,
+            })),
+            procedimientos: procedureItemForm.map((procedure) => ({
+                idProcedimiento: procedure.id,
+                nombreProcedimiento: procedure.name,
+            })),
+        };
+        console.log(JSON.stringify(consultation));
+
+        fetch(`${API_URL}/consulta`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(consultation),
+        })
+            .then(setShow(true))
+            .catch((error) => console.error(error));
+    };
+
     return (
         <>
             <CustomNavbar />
+            {show ? (
+                <Alert
+                    key="success"
+                    variant="success"
+                    dismissible
+                    onClose={() => setShow(false)}
+                >
+                    Consulta agregada con éxito
+                </Alert>
+            ) : null}
+
             <div className="consultation-bg">
                 <Container className="new-consultation patient-container ">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Button
                             variant="secondary "
                             className="mt-3"
@@ -72,38 +206,13 @@ export function NewConsultation() {
                             handleSelect={handleSelect}
                             setDate={setDate}
                             session={currentSession}
+                            patientsLoading={patientsLoading}
                         />
                         <section>
                             <h3 className="my-4">
                                 <NotesTwoToneIcon /> Bitácora de Consulta
                             </h3>
-                            <Row>
-                                <Col>
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            ID del Paciente
-                                        </InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            disabled
-                                            placeholder={selectedPatient?.id}
-                                        />
-                                    </InputGroup>
-                                </Col>
-                                <Col className="col-8">
-                                    <InputGroup className="mb-3">
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            Nombre del Paciente
-                                        </InputGroup.Text>
-                                        <FormControl
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default"
-                                            disabled
-                                            placeholder={selectedPatient?.name}
-                                        />
-                                    </InputGroup>
-                                </Col>
-                            </Row>
+
                             <Row>
                                 <Col>
                                     <FormGroup>
@@ -115,6 +224,11 @@ export function NewConsultation() {
                                                 placeholder="ej. '80/120'"
                                                 aria-label="Default"
                                                 type="text"
+                                                onChange={(e) => {
+                                                    setBloodPressure(
+                                                        e.target.value
+                                                    );
+                                                }}
                                             />
                                         </InputGroup>
                                     </FormGroup>
@@ -128,6 +242,9 @@ export function NewConsultation() {
                                             aria-label="Default"
                                             type="number"
                                             aria-describedby="inputGroup-sizing-default"
+                                            onChange={(e) => {
+                                                setWeight(e.target.value);
+                                            }}
                                         />
                                     </InputGroup>
                                 </Col>
@@ -142,6 +259,9 @@ export function NewConsultation() {
                                             as="textarea"
                                             aria-label="Default"
                                             type="text"
+                                            onChange={(e) => {
+                                                setRecord(e.target.value);
+                                            }}
                                         />
                                     </InputGroup>
                                     <InputGroup className="mb-3">
@@ -152,6 +272,9 @@ export function NewConsultation() {
                                             as="textarea"
                                             aria-label="Default"
                                             type="text"
+                                            onChange={(e) => {
+                                                setDiagnosis(e.target.value);
+                                            }}
                                         />
                                     </InputGroup>
                                 </Col>
@@ -176,6 +299,10 @@ export function NewConsultation() {
                                 icon="ScienceTwoToneIcon"
                                 items={testsItemForm}
                                 setItemForm={setTestsItemForm}
+                                hasQuantity={false}
+                                itemOptions={testOptions}
+                                handleSelect={handleTestSelect}
+                                selectedItem={selectedTest}
                             />
 
                             <ItemForm
@@ -183,6 +310,10 @@ export function NewConsultation() {
                                 icon="HealingTwoToneIcon"
                                 items={medicineItemForm}
                                 setItemForm={setMedicineItemForm}
+                                hasQuantity={true}
+                                itemOptions={medicineOptions}
+                                handleSelect={handleMedicineSelect}
+                                selectedItem={selectedMedicine}
                             />
 
                             <ItemForm
@@ -190,25 +321,32 @@ export function NewConsultation() {
                                 icon="VaccinesTwoToneIcon"
                                 items={procedureItemForm}
                                 setItemForm={setProcedureItemForm}
+                                hasQuantity={false}
+                                itemOptions={procedureOptions}
+                                handleSelect={handleProcedureSelect}
+                                selectedItem={selectedProcedure}
                             />
                             <div className="d-flex justify-content-center">
                                 <DropdownButton
                                     id="dropdown-item-button"
                                     title={
-                                        treatmentEfficacy === ""
+                                        treatmentEfficacy.def === ""
                                             ? "Eficacia del tratamiento anterior"
-                                            : treatmentEfficacy
+                                            : treatmentEfficacy.def
                                     }
                                     className="effective-dropdown"
                                 >
                                     {treatmentEfficacyOptions.map((item) => (
                                         <Dropdown.Item
-                                            key={item}
+                                            key={item.def}
                                             onClick={() =>
-                                                setTreatmentEfficacy(item)
+                                                setTreatmentEfficacy({
+                                                    def: item.def,
+                                                    val: item.val,
+                                                })
                                             }
                                         >
-                                            {item}
+                                            {item.def}
                                         </Dropdown.Item>
                                     ))}
                                 </DropdownButton>

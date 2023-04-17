@@ -6,11 +6,6 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { API_URL } from "/config.js";
 
 export function ManageStock() {
-    const [product, setProduct] = useState({
-        name: "",
-        description: "",
-    });
-
     const [isLoading, setIsLoading] = useState(true);
     const [productsLoading, setProductsLoading] = useState(true);
     /* HOSPITALS */
@@ -90,7 +85,7 @@ export function ManageStock() {
     return (
         <div className="managestock-bg">
             <Container className="managestock-container p-4">
-                <h3>Manejar Inventario</h3>
+                <h3>Gestionar Inventario</h3>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
                         <Typeahead

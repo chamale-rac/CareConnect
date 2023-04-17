@@ -5,8 +5,18 @@ import { Button, FormControl, InputGroup } from "react-bootstrap";
 import HealingTwoToneIcon from "@mui/icons-material/HealingTwoTone";
 import ScienceTwoToneIcon from "@mui/icons-material/ScienceTwoTone";
 import VaccinesTwoToneIcon from "@mui/icons-material/VaccinesTwoTone";
+import { Typeahead } from "react-bootstrap-typeahead";
 
-export default function ItemForm({ title, icon, items, setItemForm }) {
+export default function ItemForm({
+    title,
+    icon,
+    items,
+    itemOptions,
+    setItemForm,
+    handleSelect,
+    selectedItem,
+    hasQuantity,
+}) {
     switch (icon) {
         case "HealingTwoToneIcon":
             icon = <HealingTwoToneIcon />;
@@ -17,10 +27,30 @@ export default function ItemForm({ title, icon, items, setItemForm }) {
         default:
             icon = <VaccinesTwoToneIcon />;
     }
+    const updateQuantity = (index, e) => {
+        const currentItem = items[index];
+        const updatedItem = { ...currentItem, quantity: e.target.value };
+        const updatedItems = [...items];
+        updatedItems[index] = updatedItem;
+        setItemForm(updatedItems);
+    };
+
     const setItemList = items.map((item, index) => {
         return (
             <div className="d-flex my-1" key={index}>
-                <li className="list-group-item  col ">{item}</li>
+                <li className="list-group-item  col ">{item.name}</li>
+                {hasQuantity ? (
+                    <InputGroup style={{ width: "105px" }}>
+                        <FormControl
+                            type="number"
+                            placeholder="Quantity"
+                            onChange={(e) => updateQuantity(index, e)}
+                        />
+                    </InputGroup>
+                ) : (
+                    <></>
+                )}
+
                 <Button
                     variant="outline-danger"
                     onClick={(e) => {
@@ -41,25 +71,44 @@ export default function ItemForm({ title, icon, items, setItemForm }) {
             </h4>
 
             <Row>
+                <Col xs={10}>
+                    <Typeahead
+                        id="basic-typeahead-multiple"
+                        options={itemOptions}
+                        placeholder="Buscar..."
+                        labelKey={
+                            hasQuantity
+                                ? (itemOptions) =>
+                                      `${itemOptions.nombre} (x${itemOptions.cantidad})`
+                                : (itemOptions) => `${itemOptions.nombre}`
+                        }
+                        onChange={handleSelect}
+                        className="w-100"
+                    />
+                </Col>
                 <Col>
-                    <InputGroup>
-                        <FormControl
-                            placeholder=""
-                            value={inputValue}
-                            onChange={(e) => setInputValue(e.target.value)}
-                        />
-                        <Button
-                            variant="primary"
-                            type="button"
-                            onClick={(e) => {
-                                if (inputValue.trim() !== "")
-                                    setItemForm([...items, inputValue.trim()]);
-                            }}
-                        >
-                            Agregar
-                        </Button>
-                    </InputGroup>
-
+                    <Button
+                        variant="primary"
+                        type="button"
+                        onClick={(e) => {
+                            if (selectedItem !== null) {
+                                setItemForm([
+                                    ...items,
+                                    {
+                                        id: selectedItem.id,
+                                        name: selectedItem.nombre,
+                                        quantity: selectedItem.cantidad,
+                                    },
+                                ]);
+                            }
+                        }}
+                    >
+                        Agregar
+                    </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     <ul className="list-group mt-3">{setItemList}</ul>
                 </Col>
             </Row>
