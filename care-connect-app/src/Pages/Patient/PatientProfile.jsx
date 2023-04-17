@@ -15,11 +15,26 @@ const PatientProfile = () => {
 	let { patientId } = useParams()
 	const [paciente, setPaciente] = useState()
 	const [consultations, setConsultations] = useState([])
+	const [lastConsultation, setLastConsultation] = useState()
+
+	const [sortBy, setSortBy] = useState(null)
+	const [sortDirection, setSortDirection] = useState(1)
+	const [searchAuthor, setSearchAuthor] = useState('')
+	const [searchDateInterval, setSearchDateInterval] = useState({})
 
 	useEffect(() => {
 		fetch(`${API_URL}/paciente/${patientId}`, { mode: 'cors' })
 			.then((response) => response.json())
 			.then((data) => setPaciente(data))
+			.catch((error) => console.log(error))
+	}, [])
+
+	useEffect(() => {
+		fetch(`${API_URL}/paciente/ultima_consulta/${patientId}`, {
+			mode: 'cors',
+		})
+			.then((response) => response.json())
+			.then((data) => setLastConsultation(data))
 			.catch((error) => console.log(error))
 	}, [])
 
@@ -33,10 +48,22 @@ const PatientProfile = () => {
 			.catch((error) => console.log(error))
 	}, [])
 
-	const [sortBy, setSortBy] = useState(null)
-	const [sortDirection, setSortDirection] = useState(1)
-	const [searchAuthor, setSearchAuthor] = useState('')
-	const [searchDateInterval, setSearchDateInterval] = useState({})
+	const estadoType = (estado) => {
+		switch (estado) {
+			case 0:
+				return 'Paciente difunto'
+			case 1:
+				return 'Empeoramiento'
+			case 2:
+				return 'Estable'
+			case 3:
+				return 'Mejoría'
+			case 4:
+				return 'No Aplica'
+			default:
+				return 'Desconocido'
+		}
+	}
 
 	const handleSort = (field) => {
 		if (sortBy === field) {
@@ -98,6 +125,7 @@ const PatientProfile = () => {
 	return (
 		paciente && (
 			<Container className="mt-5">
+				<h1>Paciente</h1>
 				<Card className="mb-3">
 					<Card.Header>
 						<h2>Información General</h2>
@@ -118,27 +146,52 @@ const PatientProfile = () => {
 				</Card>
 				<Card className="mb-3">
 					<Card.Header>
-						<h3>Información específica</h3>
+						<h4>Información específica</h4>
+						<p
+							style={{
+								color: 'grey',
+								fontSize: '0.8rem',
+								marginBottom: '0rem',
+							}}
+						>
+							*Estos datos corresponden al ultimo chequeo del
+							paciente
+						</p>
 					</Card.Header>
-					<Card.Body>
-						<Row>
-							<Col sm={6}>
-								<p>Nombres: {paciente.nombres}</p>
-								<p>Apellidos: {paciente.apellidos}</p>
-								<p>Correo: {paciente.correo}</p>
-							</Col>
-							<Col sm={6}>
-								<p>Núm. Teléfono: {paciente.telefono}</p>
-								<p>Direccion: {paciente.direccion}</p>
-							</Col>
-						</Row>
-					</Card.Body>
+					{lastConsultation && (
+						<Card.Body>
+							<Row>
+								<Col sm={6}>
+									<p>Peso: {lastConsultation.peso}</p>
+									<p>
+										Presión Arterial:{' '}
+										{lastConsultation.presion_arterial}
+									</p>
+								</Col>
+								<Col sm={6}>
+									<p>
+										Estado del paciente:{' '}
+										{estadoType(lastConsultation.eficacia)}
+									</p>
+								</Col>
+							</Row>
+							<p
+								style={{
+									color: 'grey',
+									marginBottom: '0',
+								}}
+							>
+								<b>Fecha de actualización:</b>{' '}
+								{lastConsultation.fecha}
+							</p>
+						</Card.Body>
+					)}
 				</Card>
-				<Accordion className="mb-3" defaultActiveKey={['0']} alwaysOpen>
+				<Accordion className="mb-3">
 					<Accordion.Item eventKey="0">
 						<Accordion.Header>
 							<div className="d-flex justify-content-between align-items-center">
-								Registro de Consultas medicas
+								<h4>Consultas medicas</h4>
 							</div>
 						</Accordion.Header>
 						<Accordion.Body>

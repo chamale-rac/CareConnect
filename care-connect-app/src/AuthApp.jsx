@@ -10,6 +10,7 @@ import Login from './Pages/Login'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
 import { NewPatient } from './Pages//NewPatient/NewPatient'
 import PatientProfile from './Pages/Patient/PatientProfile'
+import Consulta from './Pages/Consulta'
 
 const AuthApp = () => {
 	return (
@@ -45,6 +46,7 @@ const AuthApp = () => {
 					path="/patient_profile/:patientId"
 					element={<PatientProfile />}
 				/>
+				<Route path="/consulta/:consultaId" element={<Consulta />} />
 				<Route
 					path="/home/new-consultation"
 					element={<NewConsultation />}
