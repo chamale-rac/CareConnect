@@ -8,7 +8,7 @@ import {
 	Button,
 	Form,
 } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { API_URL } from '/config'
 
 const PatientProfile = () => {
@@ -322,9 +322,11 @@ const PatientProfile = () => {
 																		consult.details
 																	}
 																</Card.Text>
-																<Button variant="secondary">
+																<Link
+																	to={`/consulta/${consult.id}`}
+																>
 																	Ver mas...
-																</Button>
+																</Link>
 															</Card.Body>
 														</Card>
 													</Col>
