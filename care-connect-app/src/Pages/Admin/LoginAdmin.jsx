@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
-import { API_URL } from '../../config'
+import { API_URL } from '../../../config'
 
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 
-const Login = () => {
+const LoginAdmin = () => {
 	const { login } = useContext(UserContext)
 
 	const navigate = useNavigate()
@@ -20,7 +20,7 @@ const Login = () => {
 			password,
 		})
 		try {
-			const response = await fetch(`${API_URL}/login_medico`, {
+			const response = await fetch(`${API_URL}/login_admin`, {
 				method: 'POST',
 				mode: 'cors',
 				headers: {
@@ -36,9 +36,17 @@ const Login = () => {
 				throw new Error('An error occurred while logging in.')
 			}
 			const data = await response.json()
-			console.log({ name: data.nombre, id: data.id, role: data.role })
+			console.log({
+				id: data.id,
+				id_instalacion_medica: data.id_instalacion_medica,
+				role: data.role,
+			})
 			// handle successful response
-			login({ name: data.nombre, id: data.id, role: data.role })
+			login({
+				id: data.id,
+				id_instalacion_medica: data.id_instalacion_medica,
+				role: data.role,
+			})
 			navigate('/')
 		} catch (error) {
 			console.error(error)
@@ -51,7 +59,7 @@ const Login = () => {
 			className="d-flex flex-column justify-content-center"
 			style={{ height: '100vh' }}
 		>
-			<h1>Login: Doctor</h1>
+			<h1>Login: Admin</h1>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
 				<Form.Group controlId="formBasicEmail">
@@ -84,4 +92,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default LoginAdmin
