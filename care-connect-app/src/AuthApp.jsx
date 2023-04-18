@@ -9,8 +9,10 @@ import SignIn from './Pages/SignIn'
 import Login from './Pages/Login'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
 import { NewPatient } from './Pages//NewPatient/NewPatient'
+
 import PatientProfile from './Pages/Patient/PatientProfile'
 import Consulta from './Pages/Consulta'
+import { ManagePatient} from './Pages/ManagePatient/ManagePatient'
 
 const AuthApp = () => {
 	return (
@@ -48,11 +50,11 @@ const AuthApp = () => {
 				/>
 				<Route path="/consulta/:consultaId" element={<Consulta />} />
 				<Route
-					path="/home/new-consultation"
+					path="/new-consultation"
 					element={<NewConsultation />}
 				/>
-				<Route path="/home/new-patient/:id"></Route>
-				<Route path="/home/new-patient" element={<NewPatient />} />
+        <Route path="/new-patient" element={<NewPatient />} />
+				<Route path="/manage-patient" element={<ManagePatient />} />
 				<Route path="*" element={<h1>404 Not Found</h1>} />
 			</Routes>
 		</>

@@ -1,28 +1,59 @@
 import { React, useState } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
+import { API_URL } from '/config'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function PatientForm() {
+    const navigate = useNavigate()
     const [validated, setValidated] = useState(false);
     const [patient, setPatient] = useState({
-        email: "",
-        name: "",
-        surname: "",
-        phone: "",
-        address: "",
+        correo: "",
+        nombres: "",
+        apellidos: "",
+        telefono: "",
+        direccion: "",
     });
 
     const handleSumbmit = (e) => {
+        e.preventDefault()
         const form = e.currentTarget;
+        
 
-        if (form.checkValidity() === false) {
-            e.preventDefault();
-            e.stopPropagation();
-        } else {
-            console.log(patient);
-        }
+		fetch(`${API_URL}/registrar_paciente`, {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+                correo: patient.correo,
+                nombres: patient.nombres,
+                apellidos: patient.apellidos,
+                telefono: patient.telefono,
+                direccion: patient.direccion
+			}),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(response.statusText)
+				}
+				return response.json()
+			})
+			.then((data) => {
+				console.log(data)
+				// handle successful response
+				navigate('/')
+			})
+			.catch((error) => {
+				console.log(error)
+				// handle error
+				setError(
+					'Hubo un error al registrar al paciente. Probablemente el correo ya está en uso.',
+				)
+			})
+	};
 
-        setValidated(true);
-    };
     return (
         <Form
             className="patient-container container mx-auto m-3"
@@ -35,11 +66,11 @@ export default function PatientForm() {
                 <InputGroup hasValidation>
                     <Form.Control
                         type="email"
-                        value={patient.email}
+                        value={patient.correo}
                         onChange={(e) =>
                             setPatient({
                                 ...patient,
-                                email: e.target.value,
+                                correo: e.target.value,
                             })
                         }
                         required
@@ -56,9 +87,9 @@ export default function PatientForm() {
                 <Form.Control
                     type="input"
                     placeholder=""
-                    value={patient.name}
+                    value={patient.nombres}
                     onChange={(e) =>
-                        setPatient({ ...patient, name: e.target.value })
+                        setPatient({ ...patient, nombres: e.target.value })
                     }
                     required
                 />
@@ -68,9 +99,9 @@ export default function PatientForm() {
                 <Form.Control
                     type="input"
                     placeholder=""
-                    value={patient.surname}
+                    value={patient.apellidos}
                     onChange={(e) =>
-                        setPatient({ ...patient, surname: e.target.value })
+                        setPatient({ ...patient, apellidos: e.target.value })
                     }
                     required
                 />
@@ -79,9 +110,9 @@ export default function PatientForm() {
                 <Form.Label>Teléfono</Form.Label>
                 <Form.Control
                     type="number"
-                    value={patient.phone}
+                    value={patient.telefono}
                     onChange={(e) =>
-                        setPatient({ ...patient, phone: e.target.value })
+                        setPatient({ ...patient, telefono: e.target.value })
                     }
                     required
                 />
@@ -95,9 +126,9 @@ export default function PatientForm() {
                 <Form.Control
                     type="input"
                     placeholder=""
-                    value={patient.address}
+                    value={patient.direccion}
                     onChange={(e) =>
-                        setPatient({ ...patient, address: e.target.value })
+                        setPatient({ ...patient, direccion: e.target.value })
                     }
                     required
                 />
