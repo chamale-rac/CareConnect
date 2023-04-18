@@ -24,9 +24,9 @@ export function PatientsTable({ patients, setSelectedPatient }) {
                 </tr>
             </thead>
             <tbody>
-                {patients.map((patient, Index) => (
+                {patients.map((patient) => (
                     <tr
-                        key={Index}
+                        key={patient.id}
                         onClick={() => handleRowClick(patient)}
                         className={
                             activeRow && activeRow.id === patient.id
@@ -35,11 +35,11 @@ export function PatientsTable({ patients, setSelectedPatient }) {
                         }
                     >
                         <td>{patient.id}</td>
-                        <td>{patient.name}</td>
-                        <td>{patient.surname}</td>
-                        <td>{patient.email}</td>
-                        <td>{patient.phone}</td>
-                        <td>{patient.address}</td>
+                        <td>{patient[1]}</td>
+                        <td>{patient[2]}</td>
+                        <td>{patient[3]}</td>
+                        <td>{patient[4]}</td>
+                        <td>{patient[5]}</td>
                         
                     </tr>
                 ))}

@@ -70,23 +70,23 @@ export function ManagePatient() {
                                 <tbody>
                                     <tr>
                                         <td>Nombre:</td>
-                                        <td>{selectedPatient.name}</td>
+                                        <td>{selectedPatient[1]}</td>
                                     </tr>
                                     <tr>
                                         <td>Apellido:</td>
-                                        <td>{selectedPatient.surname}</td>
+                                        <td>{selectedPatient[2]}</td>
                                     </tr>
                                     <tr>
                                         <td>Email:</td>
-                                        <td>{selectedPatient.email}</td>
+                                        <td>{selectedPatient[3]}</td>
                                     </tr>
                                     <tr>
                                         <td>Teléfono:</td>
-                                        <td>{selectedPatient.phone}</td>
+                                        <td>{selectedPatient[4]}</td>
                                     </tr>
                                     <tr>
                                         <td>Dirección:</td>
-                                        <td>{selectedPatient.address}</td>
+                                        <td>{selectedPatient[5]}</td>
                                     </tr>
                                 </tbody>
                             </Table>
