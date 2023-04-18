@@ -15,6 +15,11 @@ import { AddProduct } from "./Pages/AddProduct/AddProduct";
 import { ManageStock } from "./Pages/ManageStock/ManageStock";
 import { ManagePatient } from "./Pages/ManagePatient/ManagePatient";
 
+
+import PatientProfile from './Pages/Patient/PatientProfile'
+import Consulta from './Pages/Consulta'
+import { ManagePatient} from './Pages/ManagePatient/ManagePatient'
+
 const AuthApp = () => {
     return (
         <>
@@ -61,7 +66,12 @@ const AuthApp = () => {
                     <Route path="/add-product" element={<AddProduct />} />
                     <Route path="/manage-stock" element={<ManageStock />} />
                     <Route path="/manage-patient" element={<ManagePatient />} />
-                    <Route path="*" element={<h1>404 Not Found</h1>} />
+                    <Route path="*" element={<h1>404 Not Found</h1>} />                    
+                    <Route
+                      path="/patient_profile/:patientId"
+                      element={<PatientProfile />}
+                    />
+                    <Route path="/consulta/:consultaId" element={<Consulta />} />
                 </Routes>
             </UserProvider>
         </>
