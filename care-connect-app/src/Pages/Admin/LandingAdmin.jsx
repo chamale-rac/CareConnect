@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 
-const Landing = () => {
+const LandingAdmin = () => {
 	const { currentUser, logout } = useContext(UserContext)
 	return (
 		<Container
@@ -16,11 +16,11 @@ const Landing = () => {
 				src="https://drive.google.com/uc?id=15-xlIv3MLYsWEJd7GYs-9jysA5csr9UI"
 				alt="Logo Image"
 			/>
-			<h1 className="mt-4">CareConnect: Doctor</h1>
+			<h1 className="mt-4">CareConnect: Admin</h1>
 			<div className="mt-4">
 				<Button variant="primary" className="me-3">
 					<Link
-						to="/login"
+						to="/admin/login"
 						style={{ color: 'white', textDecoration: 'none' }}
 					>
 						LogIn
@@ -28,18 +28,18 @@ const Landing = () => {
 				</Button>
 				<Button variant="secondary">
 					<Link
-						to="/signin"
+						to="/admin/signin"
 						style={{ color: 'white', textDecoration: 'none' }}
 					>
 						SignIn
 					</Link>
 				</Button>
 			</div>
-			<Link className="mt-4" to="/admin">
-				Im an admin
+			<Link className="mt-4" to="/">
+				Im a doc
 			</Link>
 		</Container>
 	)
 }
 
-export default Landing
+export default LandingAdmin

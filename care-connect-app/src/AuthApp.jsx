@@ -4,12 +4,14 @@ import { Link, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import Stock from './Pages/Stock'
 import Notifications from './Pages/Notifications'
-import Doctors from './Pages/Doctors'
 import Landing from './Pages/Landing'
 import SignIn from './Pages/SignIn'
 import Login from './Pages/Login'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
 import { NewPatient } from './Pages//NewPatient/NewPatient'
+
+import PatientProfile from './Pages/Patient/PatientProfile'
+import Consulta from './Pages/Consulta'
 import { ManagePatient} from './Pages/ManagePatient/ManagePatient'
 
 const AuthApp = () => {
@@ -17,7 +19,7 @@ const AuthApp = () => {
 		<>
 			<nav>
 				<ul className="list-group">
-					AUTH APP
+					AUTH APP: DOCTOR
 					<li className="list-group-item">
 						This is supposed to be the navbar cause it doesnt
 						re-render
@@ -32,7 +34,7 @@ const AuthApp = () => {
 						<Link to="/notifications">Notifications</Link>
 					</li>
 					<li className="list-group-item">
-						<Link to="/doctors">Busqueda de Medicos</Link>
+						<Link to="/patient_profile">Patient Profile</Link>
 					</li>
 				</ul>
 			</nav>
@@ -42,12 +44,16 @@ const AuthApp = () => {
 				<Route path="/login" element={<Login />} />
 				<Route path="/stock" element={<Stock />} />
 				<Route path="/notifications" element={<Notifications />} />
-				<Route path="/doctors" element={<Doctors />} />
+				<Route
+					path="/patient_profile/:patientId"
+					element={<PatientProfile />}
+				/>
+				<Route path="/consulta/:consultaId" element={<Consulta />} />
 				<Route
 					path="/new-consultation"
 					element={<NewConsultation />}
 				/>
-				<Route path="/new-patient" element={<NewPatient />} />
+        <Route path="/new-patient" element={<NewPatient />} />
 				<Route path="/manage-patient" element={<ManagePatient />} />
 				<Route path="*" element={<h1>404 Not Found</h1>} />
 			</Routes>
