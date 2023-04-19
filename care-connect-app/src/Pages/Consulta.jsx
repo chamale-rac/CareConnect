@@ -13,6 +13,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { API_URL } from '/config'
 import { UserContext } from '/src/context/UserContext'
+import TablesConsulta from '/src/components/TablesConsulta'
 
 const MedicalConsultation = () => {
 	const { currentUser } = useContext(UserContext)
@@ -129,6 +130,18 @@ const MedicalConsultation = () => {
 			.catch((error) => console.log(error))
 	}, [])
 
+	const [listas, setListas] = useState()
+
+	useEffect(() => {
+		fetch(`${API_URL}/bitacora/listas/${consultaId}`, { mode: 'cors' })
+			.then((response) => response.json())
+			.then((data) => {
+				setListas(data)
+				console.log('listas', data)
+			})
+			.catch((error) => console.log(error))
+	}, [])
+
 	useEffect(() => {
 		getBitacora()
 	}, [])
@@ -187,9 +200,21 @@ const MedicalConsultation = () => {
 								<Col sm={6}>
 									<p>Peso: {bitacora.peso}</p>
 									<p>Presión Arterial: {bitacora.presion}</p>
+									<Form.Group
+										controlId="formDiagnosis"
+										className="mt-3"
+									>
+										<Form.Label>Tratamiento</Form.Label>
+										<Form.Control
+											as="textarea"
+											rows={3}
+											value={bitacora.tratamiento}
+											readOnly={true}
+										/>
+									</Form.Group>
 								</Col>
 							</Row>
-							<Card>
+							<Card className="mt-3">
 								<Card.Header>
 									<h6 style={{ marginBottom: '0px' }}>
 										Editables
@@ -322,146 +347,39 @@ const MedicalConsultation = () => {
 				<Accordion.Item eventKey="0">
 					<Accordion.Header>
 						<div className="d-flex justify-content-between align-items-center">
-							<h4>Listas</h4>
+							<h4>Asignados</h4>
 						</div>
 					</Accordion.Header>
-					<Accordion.Body>
-						<Row className="mt-2 mb-1">
-							<Col className="mb-1">
-								<Card
-									style={{
-										width: '24.1rem',
-									}}
-								>
-									<Card.Header>Medicamentos</Card.Header>
-									<Card.Body>
-										<Table
-											striped
-											bordered
-											hover
-											style={{
-												maxHeight: '150px',
-												overflowY: 'auto',
-												width: 'fit-content',
-												display: 'block',
-											}}
-										>
-											<thead>
-												<tr>
-													<th
-														style={{
-															width: '200px',
-														}}
-													>
-														Nombre
-													</th>
-													<th
-														style={{
-															width: '200px',
-														}}
-													>
-														Cantidad
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												{medicines.map((medicine) => (
-													<tr key={medicine.name}>
-														<td>{medicine.name}</td>
-														<td>
-															{medicine.quantity}
-														</td>
-													</tr>
-												))}
-											</tbody>
-										</Table>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col className="mb-1">
-								<Card
-									style={{
-										width: '24.1rem',
-									}}
-								>
-									<Card.Header>Procedimientos</Card.Header>
-									<Card.Body>
-										<Table
-											striped
-											bordered
-											hover
-											style={{
-												maxHeight: '150px',
-												overflowY: 'auto',
-												width: 'fit-content',
-												display: 'block',
-											}}
-										>
-											<thead>
-												<tr>
-													<th
-														style={{
-															width: '400px',
-														}}
-													>
-														Nombre
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												{medicines.map((medicine) => (
-													<tr key={medicine.name}>
-														<td>{medicine.name}</td>
-													</tr>
-												))}
-											</tbody>
-										</Table>
-									</Card.Body>
-								</Card>
-							</Col>
-							<Col className="mb-1">
-								<Card
-									style={{
-										width: '24.1rem',
-									}}
-								>
-									<Card.Header>Enfermedades</Card.Header>
-									<Card.Body>
-										<Table
-											striped
-											bordered
-											hover
-											style={{
-												maxHeight: '150px',
-												overflowY: 'auto',
-												width: 'fit-content',
-												display: 'block',
-											}}
-										>
-											<thead>
-												<tr>
-													<th
-														style={{
-															width: '400px',
-														}}
-													>
-														Nombre
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												{medicines.map((medicine) => (
-													<tr key={medicine.name}>
-														<td>{medicine.name}</td>
-													</tr>
-												))}
-											</tbody>
-										</Table>
-									</Card.Body>
-								</Card>
-							</Col>
-						</Row>
-					</Accordion.Body>
+					{listas ? (
+						<Accordion.Body>
+							<Row className="mt-2 mb-1">
+								<TablesConsulta
+									header={'Medicamentos'}
+									data={listas.medicamentos}
+									hasQuantity={true}
+								/>
+								<TablesConsulta
+									header={'Enfermedades'}
+									data={listas.enfermedades}
+									hasQuantity={false}
+								/>
+								<TablesConsulta
+									header={'Pruebas'}
+									data={listas.pruebas}
+									hasQuantity={false}
+								/>
+								<TablesConsulta
+									header={'Procedimientos'}
+									data={listas.procedimientos}
+									hasQuantity={false}
+								/>
+							</Row>
+						</Accordion.Body>
+					) : (
+						<Accordion.Body>
+							<p>Cargando..</p>
+						</Accordion.Body>
+					)}
 				</Accordion.Item>
 			</Accordion>
 		</Container>

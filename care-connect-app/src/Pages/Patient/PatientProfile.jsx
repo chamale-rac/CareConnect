@@ -337,17 +337,6 @@ const PatientProfile = () => {
 						</Accordion.Body>
 					</Accordion.Item>
 				</Accordion>
-				<Card className="mb-3">
-					<Card.Header>Otras opciones</Card.Header>
-					<Card.Body>
-						<Button className="me-3" variant="primary">
-							Realizar Nueva Consulta
-						</Button>
-						<Button className="me-3" variant="danger">
-							Informar muerte
-						</Button>
-					</Card.Body>
-				</Card>
 			</Container>
 		)
 	)

@@ -42,6 +42,7 @@ export function NewConsultation() {
 	const [weight, setWeight] = useState('')
 	const [record, setRecord] = useState('')
 	const [diagnosis, setDiagnosis] = useState('')
+	const [treatment, setTreatment] = useState('')
 
 	const handleTestSelect = (selectedItem) => {
 		setSelectedTest(selectedItem[0])
@@ -55,6 +56,10 @@ export function NewConsultation() {
 		setSelectedProcedure(selectedItem[0])
 	}
 
+	const handleIllnessSelect = (selectedItem) => {
+		setSelectedIllness(selectedItem[0])
+	}
+
 	const [testsItemForm, setTestsItemForm] = useState([])
 	const [selectedTest, setSelectedTest] = useState(null)
 	const [testOptions, setTestOptions] = useState([])
@@ -62,6 +67,10 @@ export function NewConsultation() {
 	const [medicineItemForm, setMedicineItemForm] = useState([])
 	const [selectedMedicine, setSelectedMedicine] = useState(null)
 	const [medicineOptions, setMedicineOptions] = useState([])
+
+	const [illnessItemForm, setIllnessItemForm] = useState([])
+	const [selectedIllness, setSelectedIllness] = useState(null)
+	const [illnessOptions, setIllnessOptions] = useState([])
 
 	useEffect(() => {
 		fetch(`${API_URL}/stock?id_instalacion_medica=${userDetails.unidad}`)
@@ -76,6 +85,13 @@ export function NewConsultation() {
 		)
 			.then((response) => response.json())
 			.then((data) => setProcedureOptions(data))
+			.catch((error) => console.log(error))
+	}, [])
+
+	useEffect(() => {
+		fetch(`${API_URL}/enfermedades`)
+			.then((response) => response.json())
+			.then((data) => setIllnessOptions(data))
 			.catch((error) => console.log(error))
 	}, [])
 
@@ -155,6 +171,7 @@ export function NewConsultation() {
 				peso: weight,
 				expediente: record,
 				diagnostico: diagnosis,
+				tratamiento: treatment,
 				eficaciaTratamiento: treatmentEfficacy.val,
 			},
 			pruebas: testsItemForm.map((test) => ({
@@ -170,6 +187,10 @@ export function NewConsultation() {
 				idProcedimiento: procedure.id,
 				nombreProcedimiento: procedure.name,
 			})),
+			enfermedades: illnessItemForm.map((illness) => ({
+				idEnfermedad: illness.id,
+				nombreEnfermedad: illness.name,
+			})),
 		}
 		console.log(JSON.stringify(consultation))
 
@@ -180,7 +201,10 @@ export function NewConsultation() {
 			},
 			body: JSON.stringify(consultation),
 		})
-			.then(setShow(true))
+			.then((response) => {
+				setShow(true)
+				alert('Consulta agregada con éxito')
+			})
 			.catch((error) => console.error(error))
 	}
 
@@ -286,12 +310,23 @@ export function NewConsultation() {
 											}}
 										/>
 									</InputGroup>
+
+									<ItemForm
+										title="Enfermedades"
+										icon="ScienceTwoToneIcon"
+										items={illnessItemForm}
+										setItemForm={setIllnessItemForm}
+										hasQuantity={false}
+										itemOptions={illnessOptions}
+										handleSelect={handleIllnessSelect}
+										selectedItem={selectedIllness}
+									/>
 								</Col>
 							</Row>
 						</section>
 
 						{/* Additional Forms */}
-						<div className="border p-2">
+						<div className="border p-2 mt-3">
 							<h3>Tratamiento</h3>
 							<InputGroup className="mb-3">
 								<InputGroup.Text id="inputGroup-sizing-default">
@@ -301,18 +336,11 @@ export function NewConsultation() {
 									as="textarea"
 									aria-label="Default"
 									type="text"
+									onChange={(e) => {
+										setTreatment(e.target.value)
+									}}
 								/>
 							</InputGroup>
-							<ItemForm
-								title="Pruebas Diagnósticas"
-								icon="ScienceTwoToneIcon"
-								items={testsItemForm}
-								setItemForm={setTestsItemForm}
-								hasQuantity={false}
-								itemOptions={testOptions}
-								handleSelect={handleTestSelect}
-								selectedItem={selectedTest}
-							/>
 
 							<ItemForm
 								title="Medicamentos"
@@ -323,6 +351,17 @@ export function NewConsultation() {
 								itemOptions={medicineOptions}
 								handleSelect={handleMedicineSelect}
 								selectedItem={selectedMedicine}
+							/>
+
+							<ItemForm
+								title="Pruebas Diagnósticas"
+								icon="ScienceTwoToneIcon"
+								items={testsItemForm}
+								setItemForm={setTestsItemForm}
+								hasQuantity={false}
+								itemOptions={testOptions}
+								handleSelect={handleTestSelect}
+								selectedItem={selectedTest}
 							/>
 
 							<ItemForm
