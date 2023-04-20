@@ -9,8 +9,8 @@ const Statistics = () => {
         "El top 10 de las enfermedades más mortales",
         "Top 10 de los médicos que más pacientes han atendido",
         "El top 5 de los pacientes con más asistencias a alguna unidad de salud",
-        "Reporte medicinas o suministros que están a punto de terminarse para una unidad de salud dada",
-        "Reporte de las 3 unidades de salud (hospitales, centros de salud y clínicas) que más pacientes atienden",
+        "Reporte medicinas o suministros que están a punto de terminarse",
+        "Reporte de las 3 unidades de salud que más pacientes atienden",
     ];
 
     const [selectedQuery, setSelectedQuery] = useState(0);
@@ -20,14 +20,26 @@ const Statistics = () => {
     const [columns, setColumns] = useState([]);
 
     useEffect(() => {
-        console.log("e");
         fetch(`${API_URL}/estadisticas/${selectedQuery}`, { mode: "cors" })
-            .then((response) => response.json())
+            .then((response) => {
+                if (response.status === 404) {
+                    // Handle resource not found error
+                    // For example, display error message or redirect to custom 404 page
+                    throw new Error("Resource not found");
+                } else {
+                    // Handle successful response
+                    // For example, update component state with data from response
+                    return response.json();
+                }
+            })
             .then((data) => {
                 setRows(data);
                 setColumns(Object.keys(data[0]));
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                // Handle errors
+                console.error(error);
+            });
     }, [selectedQuery]);
 
     return (
@@ -39,9 +51,13 @@ const Statistics = () => {
                 <ListGroup variant="flush">
                     {queries.map((query, index) => {
                         return (
-                            <ListGroup.Item className="d-flex align-items-center justify-content-between">
+                            <ListGroup.Item
+                                className="d-flex align-items-center justify-content-between"
+                                key={index}
+                            >
                                 <Button
                                     variant="light"
+                                    active={selectedQuery === index}
                                     onClick={() => {
                                         setSelectedQuery(index);
                                         setQuerySelected(true);
@@ -57,12 +73,11 @@ const Statistics = () => {
             <Container className="d-flex justify-content-center align-items-center my-5 flex-column ">
                 {querySelected ? (
                     <>
-                        <h3>{selectedQuery}</h3>
                         <Table className=" w-75 ">
                             <thead>
                                 <tr>
                                     {columns.map((column) => (
-                                        <th>{column}</th>
+                                        <th key={column}>{column}</th>
                                     ))}
                                 </tr>
                             </thead>
