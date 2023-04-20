@@ -17,25 +17,14 @@ import Statistics from "./Pages/Statistics/Statistics";
 import PatientProfile from "./Pages/Patient/PatientProfile";
 import Consulta from "./Pages/Consulta";
 
+import CustomNavbar from "./Components/CustomNavbar";
+
 const AuthApp = () => {
     return (
         <>
+            <CustomNavbar />
             <nav>
                 <ul className="list-group">
-                    AUTH APP
-                    <li className="list-group-item">
-                        This is supposed to be the navbar cause it doesnt
-                        re-render
-                    </li>
-                    <li className="list-group-item">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="list-group-item">
-                        <Link to="/stock">Consultas Stock</Link>
-                    </li>
-                    <li className="list-group-item">
-                        <Link to="/notifications">Notifications</Link>
-                    </li>
                     <li className="list-group-item">
                         <Link to="/add-product">Agregar Producto</Link>
                     </li>
