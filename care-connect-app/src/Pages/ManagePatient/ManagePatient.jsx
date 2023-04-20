@@ -64,7 +64,6 @@ export function ManagePatient() {
 						<PatientsTable
 							patients={searchResults}
 							setSelectedPatient={setSelectedPatient}
-							handleRowClick={handleRowClick}
 						/>
 					</Col>
 					<Col>
