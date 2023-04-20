@@ -4,6 +4,10 @@ import { Row, Col, Container, Button, Table } from 'react-bootstrap'
 import { PatientsTable } from '../../Components/PatientsTable'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { API_URL } from '/config'
+import {
+	TextField,
+	Box,
+  } from "@mui/material";
 import './ManagePatient.css'
 
 export function ManagePatient() {
@@ -31,10 +35,7 @@ export function ManagePatient() {
 			})
 	}
 
-	const handleRowClick = (patient) => {
-		setSelectedPatient(patient)
-		setInfoSelected(null)
-	}
+
 
 	console.log(selectedPatient)
 
@@ -46,24 +47,34 @@ export function ManagePatient() {
 				</Button>
 				<h1 className="border-bottom">Gestionar Pacientes</h1>
 				<Row>
-					<Col>
-						<h2>Pacientes</h2>
+					<Col xs={12} md={7}>
+						
 						<div>
-							<input
-								type="text"
-								value={searchTerm}
-								onChange={handleInputChange}
-							/>
-							<button onClick={handleSearchClick}>Search</button>
+						<TextField
+							label="Buscar pacientes"
+							variant="outlined"
+							size="small"
+							value={searchTerm}
+							onChange={handleInputChange}
+							sx={{ mt: 0, ml: 0 }}
+						/>
+							<Box sx={{ mt: -5, ml: 30 }}>
+							<Button
+            					variant="primary"
+								onClick={handleSearchClick}
+							>
+								Buscar
+							</Button>
+								</Box >
+								<Box sx={{ mt: 2, ml: 30 }}>
+								</Box>
+							
 						</div>
-						<div className="d-flex gap-3 my-3">
-							<Button>Ver bitácoras</Button>
-							<Button>Ver exámenes</Button>
-							<Button>Ver medicamentos</Button>
-						</div>
+						
 						<PatientsTable
 							patients={searchResults}
 							setSelectedPatient={setSelectedPatient}
+							
 						/>
 					</Col>
 					<Col>
@@ -71,7 +82,7 @@ export function ManagePatient() {
 						{selectedPatient && (
 							<Table>
 								<tbody>
-									<tr>
+									<tr className="MuiTableRow-root">
 										<td>Nombre:</td>
 										<td>{selectedPatient[1]}</td>
 									</tr>

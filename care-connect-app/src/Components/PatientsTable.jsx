@@ -15,7 +15,7 @@ export function PatientsTable({ patients, setSelectedPatient }) {
     return (
         <Table bordered className="patients-table">
             <thead>
-                <tr>
+                <tr className="MuiTableRow-root MuiTableRow-hover">
                     
                     <th>Nombres</th>
                     <th>Apellidos</th>
@@ -26,12 +26,12 @@ export function PatientsTable({ patients, setSelectedPatient }) {
             </thead>
             <tbody>
                 {patients.map((patient) => (
-                    <tr
+                    <tr 
                         key={patient[0]}
                         onClick={() => handleRowClick(patient)}
-                        className={
+                        className= {
                             activeRow && activeRow.id === patient.id
-                                ? "selected"
+                                ? "MuiTableRow-selected"
                                 : ""
                         }
                     >

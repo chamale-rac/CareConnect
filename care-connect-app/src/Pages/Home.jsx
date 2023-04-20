@@ -119,7 +119,7 @@ function Home() {
 					
 					<div className="mx-auto w-50">
 					<Row>
-					<Col>
+					<Col >
 					{pacientes &&(<PatientsTable
 							patients={pacientes}
 							setSelectedPatient={setSelectedPatient}
