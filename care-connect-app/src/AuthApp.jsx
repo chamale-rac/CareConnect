@@ -23,7 +23,6 @@ const AuthApp = () => {
 	return (
 		<>
 			<CustomNavbar />
-			<UserProvider>
 				<Routes>
 					<Route path="/signin" element={<SignIn />} />
 					<Route path="/login" element={<Login />} />
@@ -49,7 +48,6 @@ const AuthApp = () => {
 					<Route path="/estadisticas" element={<Statistics />} />
 					<Route path="/" element={<Home />} />
 				</Routes>
-			</UserProvider>
 		</>
 	)
 }
