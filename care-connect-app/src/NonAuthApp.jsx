@@ -13,10 +13,9 @@ const AuthApp = () => {
 		<>
 			<Routes>
 				<Route path="/" element={<Landing />} />
-				<Route path="/signin" element={<SignIn />} />
+				<Route path="/signup" element={<SignIn />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/admin" element={<LandingAdmin />} />
-				<Route path="/admin/signin" element={<SignInAdmin />} />
+				<Route path="/admin/signup" element={<SignInAdmin />} />
 				<Route path="/admin/login" element={<LoginAdmin />} />
 			</Routes>
 		</>
