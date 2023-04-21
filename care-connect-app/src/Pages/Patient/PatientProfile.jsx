@@ -7,6 +7,7 @@ import {
 	Accordion,
 	Button,
 	Form,
+	Spinner,
 } from 'react-bootstrap'
 import { useParams, Link } from 'react-router-dom'
 import { API_URL } from '/config'
@@ -122,223 +123,240 @@ const PatientProfile = () => {
 		  })
 		: filteredConsultations
 
-	return (
-		paciente && (
-			<Container className="mt-5">
-				<h1>Paciente</h1>
-				<Card className="mb-3">
-					<Card.Header>
-						<h2>Información General</h2>
-					</Card.Header>
+	return paciente ? (
+		<Container className="mt-5 mb-5" style={{ marginBottom: '20px' }}>
+			<h1 className="card-title">Perfil de paciente</h1>
+			<Card className="mt-5 glossy-card">
+				<Card.Header className="">
+					<h2 className="mt-3 card-title diminished more">
+						Información General
+					</h2>
+				</Card.Header>
+				<Card.Body>
+					<Row>
+						<Col sm={6}>
+							<p>Nombres: {paciente.nombres}</p>
+							<p>Apellidos: {paciente.apellidos}</p>
+							<p>Correo: {paciente.correo}</p>
+						</Col>
+						<Col sm={6}>
+							<p>Núm. Teléfono: {paciente.telefono}</p>
+							<p>Direccion: {paciente.direccion}</p>
+						</Col>
+					</Row>
+				</Card.Body>
+			</Card>
+			<Card className="mt-5 glossy-card">
+				<Card.Header>
+					<h3 className="mt-3 card-title diminished more">
+						Información específica
+					</h3>
+				</Card.Header>
+				{lastConsultation && (
 					<Card.Body>
 						<Row>
 							<Col sm={6}>
-								<p>Nombres: {paciente.nombres}</p>
-								<p>Apellidos: {paciente.apellidos}</p>
-								<p>Correo: {paciente.correo}</p>
+								<p>Peso: {lastConsultation.peso}</p>
+								<p>
+									Presión Arterial:{' '}
+									{lastConsultation.presion_arterial}
+								</p>
 							</Col>
 							<Col sm={6}>
-								<p>Núm. Teléfono: {paciente.telefono}</p>
-								<p>Direccion: {paciente.direccion}</p>
+								<p>
+									Estado del paciente:{' '}
+									{estadoType(lastConsultation.eficacia)}
+								</p>
 							</Col>
 						</Row>
-					</Card.Body>
-				</Card>
-				<Card className="mb-3">
-					<Card.Header>
-						<h4>Información específica</h4>
 						<p
 							style={{
-								color: 'grey',
-								fontSize: '0.8rem',
-								marginBottom: '0rem',
+								marginBottom: '0',
 							}}
 						>
-							*Estos datos corresponden al ultimo chequeo del
-							paciente
+							<b>Fecha de actualización:</b>{' '}
+							{lastConsultation.fecha}
 						</p>
-					</Card.Header>
-					{lastConsultation && (
+					</Card.Body>
+				)}
+			</Card>
+			<Card
+				className="mt-5 mb-4 glossy-card"
+				style={{ marginBottom: '20px' }}
+			>
+				<Card.Header className="">
+					<h2 className="mt-3 card-title diminished more">
+						Registro de consultas
+					</h2>
+				</Card.Header>
+				<Card.Body>
+					<Card
+						className="mb-4 mx-3"
+						style={{ background: 'transparent' }}
+					>
+						<Card.Header style={{ color: 'white' }}>
+							Filtros
+						</Card.Header>
 						<Card.Body>
 							<Row>
-								<Col sm={6}>
-									<p>Peso: {lastConsultation.peso}</p>
+								<Form.Group
+									className="mb-3"
+									controlId="formMedico"
+								>
+									<Form.Control
+										type="text"
+										placeholder="Nombre del medico o centro medico"
+										value={searchAuthor}
+										onChange={handleAuthorSearch}
+									/>
 									<p>
-										Presión Arterial:{' '}
-										{lastConsultation.presion_arterial}
+										Busquedas por el nombre del medico o
+										centro medico en el que se realizo la
+										consulta
 									</p>
-								</Col>
-								<Col sm={6}>
-									<p>
-										Estado del paciente:{' '}
-										{estadoType(lastConsultation.eficacia)}
-									</p>
+								</Form.Group>
+								<Form.Group
+									className="mb-3"
+									controlId="inicioFecha"
+								>
+									<Form.Label>Desde:</Form.Label>
+									<input
+										type="date"
+										placeholder="Start Date"
+										name="start"
+										className="ms-2"
+										value={searchDateInterval.start || ''}
+										onChange={handleDateIntervalSearch}
+									/>
+									<p>*Ingresa la fecha minima de busqueda</p>
+								</Form.Group>
+								<Form.Group
+									className="mb-3"
+									controlId="finFecha"
+								>
+									<Form.Label>Hasta: </Form.Label>
+									<input
+										className="ms-2"
+										type="date"
+										placeholder="End Date"
+										name="end"
+										value={searchDateInterval.end || ''}
+										onChange={handleDateIntervalSearch}
+									/>
+									<p>Ingresa la fecha maxima de busqueda</p>
+								</Form.Group>
+								<Col sm={4}>
+									<Button
+										variant="outline-secondary"
+										size="sm"
+										className="me-2"
+										onClick={() => handleSort('date')}
+										style={{
+											fontSize: '15px',
+										}}
+									>
+										Ordenar por fecha ↓↑
+									</Button>
 								</Col>
 							</Row>
-							<p
-								style={{
-									color: 'grey',
-									marginBottom: '0',
-								}}
-							>
-								<b>Fecha de actualización:</b>{' '}
-								{lastConsultation.fecha}
-							</p>
 						</Card.Body>
-					)}
-				</Card>
-				<Accordion className="mb-3">
-					<Accordion.Item eventKey="0">
-						<Accordion.Header>
-							<div className="d-flex justify-content-between align-items-center">
-								<h4>Consultas medicas</h4>
-							</div>
-						</Accordion.Header>
-						<Accordion.Body>
-							<Card className="mb-3">
-								<Card.Header>Filtros</Card.Header>
-								<Card.Body>
-									<Row>
-										<Form.Group
-											className="mb-3"
-											controlId="formMedico"
-										>
-											<Form.Control
-												type="text"
-												placeholder="Nombre del medico o centro medico"
-												value={searchAuthor}
-												onChange={handleAuthorSearch}
-											/>
-											<Form.Text className="text-muted">
-												Busquedas por el nombre del
-												medico o centro medico en el que
-												se realizo la consulta
-											</Form.Text>
-										</Form.Group>
-										<Form.Group
-											className="mb-3"
-											controlId="inicioFecha"
-										>
-											<Form.Label>Desde:</Form.Label>
-											<input
-												type="date"
-												placeholder="Start Date"
-												name="start"
-												className="ms-2"
-												value={
-													searchDateInterval.start ||
-													''
-												}
-												onChange={
-													handleDateIntervalSearch
-												}
-											/>
-											<br></br>
-											<Form.Text className="text-muted">
-												*Ingresa la fecha minima de
-												busqueda
-											</Form.Text>
-										</Form.Group>
-										<Form.Group
-											className="mb-3"
-											controlId="finFecha"
-										>
-											<Form.Label>Hasta: </Form.Label>
-											<input
-												className="ms-2"
-												type="date"
-												placeholder="End Date"
-												name="end"
-												value={
-													searchDateInterval.end || ''
-												}
-												onChange={
-													handleDateIntervalSearch
-												}
-											/>
-											<br></br>
-											<Form.Text className="text-muted">
-												Ingresa la fecha maxima de
-												busqueda
-											</Form.Text>
-										</Form.Group>
-										<Col sm={4}>
-											<Button
-												variant="outline-secondary"
-												size="sm"
-												className="me-2"
-												onClick={() =>
-													handleSort('date')
-												}
-												style={{
-													fontSize: '15px',
-												}}
-											>
-												Ordenar por fecha ↓↑
-											</Button>
-										</Col>
-									</Row>
-								</Card.Body>
-							</Card>
-							<Container className="mb-3">
-								{Array(
-									Math.ceil(sortedConsultations.length / 3),
-								)
-									.fill()
-									.map((_, rowIdx) => (
-										<Row className="mt-2 mb-2" key={rowIdx}>
-											{sortedConsultations
-												.slice(
-													rowIdx * 3,
-													rowIdx * 3 + 3,
-												)
-												.map((consult, colIdx) => (
-													<Col
-														className="mb-2"
-														key={colIdx}
-													>
-														<Card
+					</Card>
+					<Container className="mb-3">
+						{Array(Math.ceil(sortedConsultations.length / 3))
+							.fill()
+							.map((_, rowIdx) => (
+								<Row className="mt-2 mb-2" key={rowIdx}>
+									{sortedConsultations
+										.slice(rowIdx * 3, rowIdx * 3 + 3)
+										.map((consult, colIdx) => (
+											<Col className="mb-2" key={colIdx}>
+												<Card
+													style={{
+														width: '24.1rem',
+
+														height: '17rem',
+													}}
+													className="glossy-card"
+												>
+													<Card.Body>
+														<Card.Title>
+															<p
+																style={{
+																	fontSize:
+																		'20px',
+																}}
+															>
+																Doctor:{' '}
+																{consult.author}
+															</p>
+														</Card.Title>
+														<Card.Subtitle>
+															<p>
+																Hospital:{' '}
+																{
+																	consult.instalacion
+																}
+															</p>
+														</Card.Subtitle>
+														<Card.Body
+															className="truncate"
 															style={{
-																width: '24.1rem',
+																fontSize:
+																	'12px',
+																marginBottom:
+																	'10px',
 															}}
 														>
-															<Card.Body>
-																<Card.Title>
-																	{
-																		consult.author
-																	}
-																</Card.Title>
-																<Card.Subtitle className="mb-2 text-muted">
-																	{
-																		consult.date
-																	}{' '}
-																	|{' '}
-																	{
-																		consult.instalacion
-																	}
-																</Card.Subtitle>
-																<Card.Text>
-																	{
-																		consult.details
-																	}
-																</Card.Text>
-																<Link
-																	to={`/consulta/${consult.id}`}
-																>
-																	Ver mas...
-																</Link>
-															</Card.Body>
-														</Card>
-													</Col>
-												))}
-										</Row>
-									))}
-							</Container>
-						</Accordion.Body>
-					</Accordion.Item>
-				</Accordion>
-			</Container>
-		)
+															DP:{' '}
+															{consult.details}{' '}
+														</Card.Body>
+														<Link
+															className="btn"
+															style={{
+																fontSize:
+																	'15px',
+																marginBottom:
+																	'10px',
+															}}
+															to={`/consulta/${consult.id}`}
+														>
+															Ver mas...
+														</Link>
+														<Card.Footer
+															style={{
+																textAlign:
+																	'right',
+																background:
+																	'transparent',
+																fontSize:
+																	'12px',
+															}}
+														>
+															{consult.date}
+														</Card.Footer>
+													</Card.Body>
+												</Card>
+											</Col>
+										))}
+								</Row>
+							))}
+					</Container>
+				</Card.Body>
+				<Card.Footer>
+					<p>*DP: Diagnostico Preliminar</p>
+				</Card.Footer>
+			</Card>
+			<br />
+		</Container>
+	) : (
+		<div
+			className="d-flex justify-content-center align-items-center"
+			style={{ height: '50vh' }}
+		>
+			<Spinner animation="grow" role="status">
+				<span className="visually-hidden">Loading...</span>
+			</Spinner>
+		</div>
 	)
 }
 

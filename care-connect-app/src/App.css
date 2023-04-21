@@ -78,6 +78,13 @@ h4 {
 
 }
 
+.card-title.diminished.more {
+    text-transform: capitalize;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 30px;
+
+}
+
 .page-title {
     text-transform: capitalize;
     font-weight: bold;
@@ -343,25 +350,41 @@ h6 span {
 }
 
 .btn.special {
-    border-color: rgb(239, 242, 246);
-    color: rgb(239, 242, 246);
-    fill: rgb(239, 242, 246);
+    border-color: rgba(239, 242, 246, 0.626);
+    color: rgba(239, 242, 246, 0.951);
+    fill: rgba(239, 242, 246, 0.647);
 }
 
 .btn:focus {
-    color: #171e29;
+    color: rgb(239, 242, 246);
 }
 
-.btn:hover {
+.btn:hover,
+.btn:active {
     border-color: rgb(239, 242, 246);
     color: rgb(239, 242, 246);
     fill: rgb(239, 242, 246);
 }
 
 .btn:active {
-    border-color: #06f;
-    color: #06f;
-    fill: #06f;
+    border-color: rgb(239, 242, 246);
+    color: rgb(239, 242, 246);
+    fill: rgb(239, 242, 246);
+}
+
+.btn.special:hover {
+    background-color: #c4c3ca5a;
+}
+
+.btn.special:focus {
+    box-shadow: none;
+    background-color: #c4c3ca5a !important;
+    color: inherit !important;
+}
+
+.btn.special:active {
+    background-color: #c4c3ca5a !important;
+    color: inherit !important;
 }
 
 
@@ -380,4 +403,34 @@ h6 span {
     height: 26px;
     width: auto;
     display: block;
+}
+
+/*mine*/
+
+.my-nav {
+    background: rgba(65, 65, 65, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.custom-hover:hover {
+    background-color: rgba(255, 255, 255, 0.267) !important;
+}
+
+.glossy-card {
+    background: rgba(109, 108, 108, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.truncate {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
 }

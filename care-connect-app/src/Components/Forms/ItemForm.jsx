@@ -51,14 +51,23 @@ export default function ItemForm({
 
 	const setItemList = items.map((item, index) => {
 		return (
-			<div className="d-flex my-1" key={index}>
-				<li className="list-group-item  col ">{item.name}</li>
+			<div
+				className="d-flex my-1"
+				style={{
+					marginLeft: '10px',
+				}}
+				key={index}
+			>
+				<li className="list-group-item  col">{item.name}</li>
 				{hasQuantity ? (
-					<InputGroup style={{ width: '105px' }}>
+					<InputGroup style={{ width: '130px' }}>
 						<FormControl
 							type="number"
 							placeholder="Cantidad"
 							onChange={(e) => updateQuantity(index, e, item.max)}
+							style={{
+								marginLeft: '10px',
+							}}
 						/>
 					</InputGroup>
 				) : (
@@ -70,6 +79,9 @@ export default function ItemForm({
 					onClick={(e) => {
 						setItemForm(items.filter((e) => e !== item))
 					}}
+					style={{
+						marginLeft: '10px',
+					}}
 				>
 					❌
 				</Button>
@@ -79,54 +91,61 @@ export default function ItemForm({
 	const [inputValue, setInputValue] = useState('')
 
 	return (
-		<>
-			<h4 className="my-3">
+		<div className="mt-4">
+			<h3 className="my-3 card-title diminished more">
 				{icon} {title}
-			</h4>
+			</h3>
 
 			<Row>
-				<Col xs={10}>
-					<Typeahead
-						id="basic-typeahead-multiple"
-						options={itemOptions}
-						placeholder="Buscar..."
-						labelKey={
-							hasQuantity
-								? (itemOptions) =>
-										`${itemOptions.nombre} (x${itemOptions.cantidad})`
-								: (itemOptions) => `${itemOptions.nombre}`
-						}
-						onChange={handleSelect}
-						className="w-100"
-					/>
-				</Col>
-				<Col>
-					<Button
-						variant="primary"
-						type="button"
-						onClick={(e) => {
-							if (selectedItem !== null) {
-								setItemForm([
-									...items,
-									{
-										id: selectedItem.id,
-										name: selectedItem.nombre,
-										quantity: selectedItem.cantidad,
-										max: selectedItem.cantidad,
-									},
-								])
-							}
+				<Col xs={11}>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							width: '90%',
 						}}
 					>
-						Agregar
-					</Button>
+						<Typeahead
+							id="basic-typeahead-multiple"
+							options={itemOptions}
+							placeholder="Buscar..."
+							labelKey={
+								hasQuantity
+									? (itemOptions) =>
+											`${itemOptions.nombre} (x${itemOptions.cantidad})`
+									: (itemOptions) => `${itemOptions.nombre}`
+							}
+							onChange={handleSelect}
+							style={{ flex: 4, marginLeft: '10px' }}
+						/>
+						<Button
+							variant="primary"
+							type="button"
+							style={{ flex: 1, marginLeft: '10px' }}
+							onClick={(e) => {
+								if (selectedItem !== null) {
+									setItemForm([
+										...items,
+										{
+											id: selectedItem.id,
+											name: selectedItem.nombre,
+											quantity: selectedItem.cantidad,
+											max: selectedItem.cantidad,
+										},
+									])
+								}
+							}}
+						>
+							Agregar
+						</Button>
+					</div>
 				</Col>
 			</Row>
 			<Row>
 				<Col>
-					<ul className="list-group mt-3">{setItemList}</ul>
+					<ul className="list-group mt-2">{setItemList}</ul>
 				</Col>
 			</Row>
-		</>
+		</div>
 	)
 }

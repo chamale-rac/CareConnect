@@ -9,9 +9,10 @@ import { API_URL } from '/config'
 function NotificationsPage() {
 	const { currentUser } = useContext(UserContext)
 
-	const [notifications, setNotifications] = useState([])
 	const [selectedNotification, setSelectedNotification] = useState(null)
 	const [showDetailsModal, setShowDetailsModal] = useState(false)
+
+	const [notifications, setNotifications] = useState([])
 
 	useEffect(() => {
 		fetch(
