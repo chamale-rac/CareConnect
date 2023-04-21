@@ -15,10 +15,7 @@ function NotificationsPage() {
 	const [notifications, setNotifications] = useState([])
 
 	useEffect(() => {
-		fetch(
-			`${API_URL}/notificaciones/${currentUser.id_instalacion_medica}`,
-			{ mode: 'cors' },
-		)
+		fetch(`${API_URL}/notificaciones/all`, { mode: 'cors' })
 			.then((response) => response.json())
 			.then((data) => setNotifications(data))
 			.catch((error) => console.error(error))
@@ -46,8 +43,8 @@ function NotificationsPage() {
 				<Col>
 					<h1 className="page-title">Notificaciones</h1>
 					<p>
-						*Estas notificaciones pertenecen unicamente al stock de
-						la unidad medica a la que perteneces.
+						*Estas notificaciones pertenecen a todas las unidades
+						medicas.
 					</p>
 				</Col>
 			</Row>
@@ -76,6 +73,9 @@ function NotificationsPage() {
 										{tipoNotificacion(
 											notification.tipo_notificacion,
 										)}
+										<br />
+										Unidad médica:{' '}
+										{notification.instalacion_medica}
 									</Card.Subtitle>
 									<Card.Text>
 										Días para expirar:{' '}

@@ -420,11 +420,28 @@ h6 span {
 }
 
 .glossy-card {
-    background: rgba(109, 108, 108, 0.25);
+    background: rgba(88, 63, 107, 0.25);
     box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
     backdrop-filter: blur(17px);
     -webkit-backdrop-filter: blur(17px);
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glossy-card-dark {
+    background: rgba(209, 162, 250, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glossy-card-non-border {
+    background: rgba(88, 63, 107, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -433,4 +450,36 @@ h6 span {
     overflow: hidden;
     white-space: nowrap;
 
+}
+
+.accordion-button {
+    background: rgba(109, 108, 108, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: whitesmoke;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(109, 108, 108, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: whitesmoke;
+}
+
+.modal-header {
+    color: black;
+}
+
+.modal-body {
+    color: black;
+}
+
+.modal-footer {
+    color: black;
 }

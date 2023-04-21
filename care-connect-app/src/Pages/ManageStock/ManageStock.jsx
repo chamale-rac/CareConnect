@@ -90,8 +90,8 @@ export function ManageStock() {
 			})
 	}
 	return (
-		<div className="managestock-bg">
-			<Container className="managestock-container p-4">
+		<div className="">
+			<Container className="glossy-card mt-5 p-4">
 				<h3>Añadir a Inventario</h3>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group className="mb-3">

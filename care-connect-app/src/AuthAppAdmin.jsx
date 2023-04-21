@@ -6,42 +6,31 @@ import Transferencia from './Pages/Admin/Transferencia'
 import { NewConsultation } from './Pages/NewConsultation/NewConsultation'
 import { NewPatient } from './Pages/NewPatient/NewPatient'
 
+import Statistics from './Pages/Statistics/Statistics'
+import Notifications from './Pages/NotificationsAdmin'
+import CustomNavbar from './Components/CustomNavbarAdmin'
+import { AdminHome } from './Pages/AdminHome'
+
+import { AddProduct } from './Pages/AddProduct/AddProduct'
+import { ManageStock } from './Pages/ManageStock/ManageStock'
+import Stock from './Pages/Stock'
+
 const AuthAppAdmin = () => {
 	return (
 		<>
-			<nav>
-				<ul className="list-group">
-					AUTH APP: ADMIN
-					<li className="list-group-item">
-						This is supposed to be the navbar cause it doesnt
-						re-render
-					</li>
-					<li className="list-group-item">
-						<Link to="/">Home</Link>
-					</li>
-					<li className="list-group-item">
-						<Link to="/transferencia">
-							Transferencia de Medicos
-						</Link>
-					</li>
-				</ul>
-			</nav>
+			<CustomNavbar />
 			<Routes>
-				<Route
-					path="/"
-					element={
-						<div>
-							This it supposed to be the home for admin
-							<SettingsDropdown />
-						</div>
-					}
-				/>
-				<Route path="/transferencia" element={<Transferencia />} />
+				<Route path="/" element={<AdminHome />} />
 				<Route
 					path="/home/new-consultation"
 					element={<NewConsultation />}
 				/>
+				<Route path="/estadisticas" element={<Statistics />} />
+				<Route path="/notifications" element={<Notifications />} />
 				<Route path="*" element={<h1>404 Not Found</h1>} />
+				<Route path="/add-product" element={<AddProduct />} />
+				<Route path="/add-stock" element={<ManageStock />} />
+				<Route path="/manage-stock" element={<Stock />} />
 			</Routes>
 		</>
 	)

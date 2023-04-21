@@ -48,6 +48,8 @@ const Login = () => {
 				id: data.id,
 				role: data.role,
 				id_instalacion_medica: data.id_instalacion_medica,
+				nombre_instalacion_medica: data.nombre_instalacion_medica,
+				nombre_especialidad_medica: data.nombre_especialidad_medica,
 			})
 			navigate('/')
 		} catch (error) {

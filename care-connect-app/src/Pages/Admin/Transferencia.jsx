@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Alert } from 'react-bootstrap'
 import { Search } from '@mui/icons-material'
 import { UserContext } from '/src/context/UserContext'
 
@@ -21,6 +21,7 @@ import { API_URL } from '/config'
 
 function Transferencia() {
 	// Replace this with actual data
+	const [success, setSuccess] = useState('')
 	const { currentUser } = useContext(UserContext)
 
 	const [instalaciones, setInstalaciones] = useState([])
@@ -103,7 +104,7 @@ function Transferencia() {
 				setSelectedDoctor(null)
 				getMedicos()
 				// Clear the selected doctor after saving changes
-				alert('Se ha transferido el médico exitosamente.')
+				setSuccess('Doctor transferido exitosamente.')
 			})
 			.catch((error) => {
 				console.log(error)
@@ -117,22 +118,43 @@ function Transferencia() {
 	}
 
 	return (
-		<Container>
+		<Container className="mt-5">
+			<h1 className="page-title">Transferir médicos</h1>
+
+			{success && (
+				<Alert
+					onClose={() => setSuccess(false)}
+					dismissible
+					variant="success"
+				>
+					{success}
+				</Alert>
+			)}
 			<Row>
-				<Col xs={12} md={6}>
-					<h1>Search Doctors</h1>
+				<Col
+					xs={12}
+					md={6}
+					className="glossy-card-dark"
+					style={{ padding: '30px' }}
+				>
+					<h1
+						className="card-title diminished more"
+						style={{ color: '#383735' }}
+					>
+						Buscar médico
+					</h1>
 					<form onSubmit={handleFormSubmit}>
 						<TextField
-							label="Doctor Name"
+							label="Nombre del medico"
 							value={doctorNameFilter}
 							onChange={handleDoctorNameFilterChange}
 							fullWidth
 							margin="normal"
 						/>
 						<FormControl fullWidth margin="normal">
-							<InputLabel>Hospital</InputLabel>
+							<InputLabel>Unidad Medica</InputLabel>
 							<Select
-								label="Hospital"
+								label="Unidad medica"
 								id="hospital-filter-select"
 								value={hospitalFilter}
 								onChange={handleHospitalFilterChange}
@@ -153,8 +175,8 @@ function Transferencia() {
 					<Table>
 						<TableHead>
 							<TableRow>
-								<TableCell>Name</TableCell>
-								<TableCell>Hospital</TableCell>
+								<TableCell>Nombre</TableCell>
+								<TableCell>Unidad Medica</TableCell>
 								<TableCell></TableCell>
 							</TableRow>
 						</TableHead>
@@ -185,7 +207,7 @@ function Transferencia() {
 													)
 												}
 											>
-												Move
+												Transferir
 											</Button>
 										</TableCell>
 									</TableRow>
@@ -193,26 +215,36 @@ function Transferencia() {
 						</TableBody>
 					</Table>
 				</Col>
-				<Col xs={12} md={6}>
-					<h1>Doctor Details</h1>
+				<Col
+					xs={12}
+					md={5}
+					className="glossy-card-dark"
+					style={{ padding: '30px', marginLeft: '100px' }}
+				>
+					<h1
+						className="card-title diminished more"
+						style={{ color: '#383735' }}
+					>
+						Médico seleccionado
+					</h1>
 					{selectedDoctor ? (
 						<form onSubmit={handleFormSubmit}>
 							<TextField
-								label="Doctor Name"
+								label="Nombre del medico"
 								value={selectedDoctor[1]}
 								fullWidth
 								margin="normal"
 								disabled
 							/>
 							<TextField
-								label="Current Hospital"
+								label="Unidad medica actual"
 								value={instalacionIdToName(selectedDoctor[2])}
 								fullWidth
 								margin="normal"
 								disabled
 							/>
 							<FormControl fullWidth margin="normal">
-								<InputLabel>New Hospital</InputLabel>
+								<InputLabel>Nuevo hospital</InputLabel>
 								<Select
 									label="New Hospital"
 									id="new-hospital-select"
@@ -236,18 +268,22 @@ function Transferencia() {
 										))}
 								</Select>
 							</FormControl>
-							<Button type="submit" variant="contained">
-								Save Changes
+							<Button
+								type="submit"
+								variant="contained"
+								className="me-1"
+							>
+								Guardar cambios
 							</Button>
 							<Button
 								variant="outlined"
 								onClick={handleCancelClick}
 							>
-								Cancel
+								Cancelar
 							</Button>
 						</form>
 					) : (
-						<p>Select a doctor to view details</p>
+						<p>Selecciona un médico para ver los detalles</p>
 					)}
 				</Col>
 			</Row>

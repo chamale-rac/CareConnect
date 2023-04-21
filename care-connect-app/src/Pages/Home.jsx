@@ -23,21 +23,6 @@ function Home() {
 	const { currentUser } = useContext(UserContext)
 	const navigate = useNavigate()
 
-	const consultations = [
-		{
-			fecha: '2021-09-01',
-			unidad: 'A',
-			paciente: 'Johan Liebert',
-			prioridad: 'Alta',
-		},
-		{
-			fecha: '2021-09-02',
-			unidad: 'B',
-			paciente: 'Johnny Joestar',
-			prioridad: 'Baja',
-		},
-	]
-
 	const [currentUserInfo, setCurrentUserInfo] = useState({})
 	const [userLoading, setUserLoading] = useState(true)
 	const [pacientes, setPacientes] = useState()
@@ -58,9 +43,9 @@ function Home() {
 			const data = await response.json()
 			setCurrentUserInfo({
 				nombre: data[4],
-				unidad: data[7],
+				unidad: currentUser.nombre_instalacion_medica,
 				rol: 'Doctor',
-				especialidad: data[6],
+				especialidad: currentUser.nombre_especialidad_medica,
 			})
 			setUserLoading(false)
 		}

@@ -49,6 +49,8 @@ const LoginAdmin = () => {
 				id: data.id,
 				id_instalacion_medica: data.id_instalacion_medica,
 				role: data.role,
+				correo: data.correo,
+				nombre_instalacion: data.nombre_instalacion,
 			})
 			navigate('/')
 		} catch (error) {

@@ -117,6 +117,7 @@ export function NewConsultation() {
 	const [currentSession, setCurrentSession] = useState({
 		doctor: userDetails.nombre,
 		center: userDetails.unidad,
+		place: currentUser.nombre_instalacion_medica,
 	})
 
 	const [patients, setPatients] = useState([])

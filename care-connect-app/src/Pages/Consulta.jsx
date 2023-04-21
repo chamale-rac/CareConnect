@@ -155,10 +155,12 @@ const MedicalConsultation = () => {
 
 	return (
 		<Container className="mt-5">
-			<h1>Consulta</h1>
-			<Card className="mb-3">
+			<h1 className="page-title">Consulta</h1>
+			<Card className="mb-3 glossy-card">
 				<Card.Header>
-					<h2>Información General</h2>
+					<h2 className="card-title diminished more mt-3">
+						Información General
+					</h2>
 				</Card.Header>
 				{consulta ? (
 					<Card.Body>
@@ -173,8 +175,11 @@ const MedicalConsultation = () => {
 						</Row>
 						<p
 							style={{
-								color: 'grey',
+								color: 'whitesmoke',
 								marginBottom: '0',
+								textAlign: 'right',
+								opacity: '0.7',
+								marginRight: '4px',
 							}}
 						>
 							<b>Fecha de realización:</b> {consulta.fecha}
@@ -187,15 +192,15 @@ const MedicalConsultation = () => {
 				)}
 			</Card>
 
-			<Accordion className="mb-3" defaultActiveKey="0">
-				<Accordion.Item eventKey="0">
+			<Accordion className="mb-3 glossy-card" defaultActiveKey="0">
+				<Accordion.Item eventKey="0" className="glossy-card">
 					<Accordion.Header>
 						<div className="d-flex justify-content-between align-items-center">
 							<h4>Información específica</h4>
 						</div>
 					</Accordion.Header>
 					{bitacora ? (
-						<Accordion.Body>
+						<Accordion.Body style={{ color: 'whitesmoke' }}>
 							<Row>
 								<Col sm={6}>
 									<p>Peso: {bitacora.peso}</p>
@@ -214,7 +219,10 @@ const MedicalConsultation = () => {
 									</Form.Group>
 								</Col>
 							</Row>
-							<Card className="mt-3">
+							<Card
+								className="mt-3 glossy-card"
+								style={{ color: 'whitesmoke' }}
+							>
 								<Card.Header>
 									<h6 style={{ marginBottom: '0px' }}>
 										Editables
@@ -325,8 +333,11 @@ const MedicalConsultation = () => {
 								<Card.Footer>
 									<p
 										style={{
-											color: 'grey',
+											color: 'whitesmoke',
 											marginBottom: '0',
+											textAlign: 'right',
+											opacity: '0.7',
+											marginRight: '4px',
 										}}
 									>
 										<b>Fecha de actualización:</b>{' '}
@@ -343,8 +354,8 @@ const MedicalConsultation = () => {
 				</Accordion.Item>
 			</Accordion>
 
-			<Accordion className="mb-4">
-				<Accordion.Item eventKey="0">
+			<Accordion className="mb-4 glossy-card">
+				<Accordion.Item eventKey="0" className="glossy-card">
 					<Accordion.Header>
 						<div className="d-flex justify-content-between align-items-center">
 							<h4>Asignados</h4>

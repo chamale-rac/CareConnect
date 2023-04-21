@@ -47,21 +47,28 @@ export default function ConsultationForm({
 			<Row>
 				<Col>
 					<InputGroup className="mb-3">
-						<InputGroup.Text id="inputGroup-sizing-default">
+						<InputGroup.Text
+							id="inputGroup-sizing-default"
+							style={{ fontSize: '10px' }}
+						>
 							Centro de Salud
 						</InputGroup.Text>
 						<FormControl
 							aria-label="Default"
 							aria-describedby="inputGroup-sizing-default"
 							disabled
-							placeholder={session.center}
+							style={{ fontSize: '10px' }}
+							placeholder={session.place}
 						/>
 					</InputGroup>
 				</Col>
 
 				<Col>
 					<InputGroup className="mb-3">
-						<InputGroup.Text id="inputGroup-sizing-default">
+						<InputGroup.Text
+							id="inputGroup-sizing-default"
+							style={{ fontSize: '10px' }}
+						>
 							Médico Encargado
 						</InputGroup.Text>
 						<FormControl
@@ -69,6 +76,7 @@ export default function ConsultationForm({
 							aria-describedby="inputGroup-sizing-default"
 							disabled
 							placeholder={session.doctor}
+							style={{ fontSize: '10px' }}
 						/>
 					</InputGroup>
 				</Col>
