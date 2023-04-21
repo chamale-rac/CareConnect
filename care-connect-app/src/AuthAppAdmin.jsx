@@ -20,7 +20,6 @@ const AuthAppAdmin = () => {
 		<>
 			<CustomNavbar />
 			<Routes>
-				<Route path="/" element={<AdminHome />} />
 				<Route
 					path="/home/new-consultation"
 					element={<NewConsultation />}
@@ -31,6 +30,7 @@ const AuthAppAdmin = () => {
 				<Route path="/add-product" element={<AddProduct />} />
 				<Route path="/add-stock" element={<ManageStock />} />
 				<Route path="/manage-stock" element={<Stock />} />
+				<Route path="/" element={<AdminHome />} />
 			</Routes>
 		</>
 	)

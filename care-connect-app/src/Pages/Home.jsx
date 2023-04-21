@@ -37,9 +37,7 @@ function Home() {
 	}, [])
 	useEffect(() => {
 		const fetchMedic = async () => {
-			const response = await fetch(
-				`http://localhost:5000/medicos/${currentUser.id}`,
-			)
+			const response = await fetch(`${API_URL}/medicos/${currentUser.id}`)
 			const data = await response.json()
 			setCurrentUserInfo({
 				nombre: data[4],

@@ -25,7 +25,6 @@ const AuthApp = () => {
 			<CustomNavbar />
 			<UserProvider>
 				<Routes>
-					<Route path="/" element={<Home />} />
 					<Route path="/signin" element={<SignIn />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/stock" element={<Stock />} />
@@ -48,6 +47,7 @@ const AuthApp = () => {
 						element={<Consulta />}
 					/>
 					<Route path="/estadisticas" element={<Statistics />} />
+					<Route path="/" element={<Home />} />
 				</Routes>
 			</UserProvider>
 		</>

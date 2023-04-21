@@ -12,11 +12,11 @@ const AuthApp = () => {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<Landing />} />
 				<Route path="/signup" element={<SignIn />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/admin/signup" element={<SignInAdmin />} />
 				<Route path="/admin/login" element={<LoginAdmin />} />
+				<Route path="/" element={<Landing />} />
 			</Routes>
 		</>
 	)
