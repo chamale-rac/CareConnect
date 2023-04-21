@@ -43,7 +43,7 @@ const FlipCard = () => {
 													alt="Logo Image"
 												/>
 												<h4 className="card-title">
-													Medico
+													Médico
 												</h4>
 
 												<Link
@@ -78,7 +78,7 @@ const FlipCard = () => {
 													src="https://drive.google.com/uc?id=1j-jweqS4W6pcKlIi0rPSWAkWAFZk0j3b"
 													alt="Logo Image"
 												/>
-												<h4 className="card-title">
+												<h4 className="card-title diminished">
 													Administrador
 												</h4>
 												<Link
