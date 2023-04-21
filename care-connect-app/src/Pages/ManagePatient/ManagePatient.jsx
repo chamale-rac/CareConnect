@@ -41,7 +41,7 @@ export function ManagePatient() {
 	return (
 		<>
 			<Container className="mt-4">
-				<Button variant="secondary " onClick={handleBackClick}>
+				<Button className="btn" onClick={handleBackClick}>
 					<ArrowBackIcon />
 				</Button>
 				<h1 className="border-bottom">Gestionar Pacientes</h1>

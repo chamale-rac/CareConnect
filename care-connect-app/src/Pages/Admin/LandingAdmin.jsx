@@ -6,10 +6,7 @@ import { UserContext } from '../../context/UserContext'
 const LandingAdmin = () => {
 	const { currentUser, logout } = useContext(UserContext)
 	return (
-		<Container
-			className="d-flex flex-column align-items-center justify-content-center"
-			style={{ height: '100vh' }}
-		>
+		<>
 			<img
 				width="150"
 				height="150"
@@ -35,10 +32,7 @@ const LandingAdmin = () => {
 					</Link>
 				</Button>
 			</div>
-			<Link className="mt-4" to="/">
-				Im a doc
-			</Link>
-		</Container>
+		</>
 	)
 }
 

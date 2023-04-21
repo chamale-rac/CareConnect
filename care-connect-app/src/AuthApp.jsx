@@ -44,32 +44,27 @@ const AuthApp = () => {
 					</li>
 				</ul>
 			</nav>
-			<UserProvider>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/signin" element={<SignIn />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/stock" element={<Stock />} />
-					<Route path="/notifications" element={<Notifications />} />
-					<Route
-						path="/new-consultation/:patientId?"
-						element={<NewConsultation />}
-					/>
-					<Route path="/new-patient" element={<NewPatient />} />
-					<Route path="/add-product" element={<AddProduct />} />
-					<Route path="/manage-stock" element={<ManageStock />} />
-					<Route path="/manage-patient" element={<ManagePatient />} />
-					<Route path="*" element={<h1>404 Not Found</h1>} />
-					<Route
-						path="/patient_profile/:patientId"
-						element={<PatientProfile />}
-					/>
-					<Route
-						path="/consulta/:consultaId"
-						element={<Consulta />}
-					/>
-				</Routes>
-			</UserProvider>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/signin" element={<SignIn />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/stock" element={<Stock />} />
+				<Route path="/notifications" element={<Notifications />} />
+				<Route
+					path="/new-consultation/:patientId?"
+					element={<NewConsultation />}
+				/>
+				<Route path="/new-patient" element={<NewPatient />} />
+				<Route path="/add-product" element={<AddProduct />} />
+				<Route path="/manage-stock" element={<ManageStock />} />
+				<Route path="/manage-patient" element={<ManagePatient />} />
+				<Route path="*" element={<h1>404 Not Found</h1>} />
+				<Route
+					path="/patient_profile/:patientId"
+					element={<PatientProfile />}
+				/>
+				<Route path="/consulta/:consultaId" element={<Consulta />} />
+			</Routes>
 		</>
 	)
 }

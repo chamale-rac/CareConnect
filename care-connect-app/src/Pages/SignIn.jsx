@@ -4,6 +4,9 @@ import { Container, Form, Row, Col, Button, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { API_URL } from '../../config'
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Link } from 'react-router-dom'
+
 function SignIn() {
 	const navigate = useNavigate()
 
@@ -87,7 +90,30 @@ function SignIn() {
 			className="d-flex flex-column justify-content-center"
 			style={{ height: '100vh' }}
 		>
-			<h1>Sign Up</h1>
+			<Link class="btn mt-4 mb-4" style={{ width: 'fit-content' }} to="/">
+				<ArrowBackIcon />
+			</Link>
+
+			<h1 className="page-title">Sign Up</h1>
+			<p style={{ marginBottom: '20px' }}>
+				Registrate como{' '}
+				<span
+					style={{
+						fontSize: '16px',
+					}}
+				>
+					👨‍⚕️
+				</span>{' '}
+				<span
+					style={{
+						fontWeight: 'bold',
+						textDecoration: 'underline',
+					}}
+				>
+					Doctor
+				</span>{' '}
+				en la plataforma.
+			</p>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
 				<Form.Group controlId="formBasicEmail">

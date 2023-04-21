@@ -6,12 +6,11 @@ import { UserContext } from './context/UserContext'
 
 const RouterApp = () => {
 	const { currentUser } = useContext(UserContext)
-	if (currentUser) {
-		if (currentUser.role === 'medico') {
-			return <AuthApp />
-		} else if ((currentUser.role = 'admin')) {
-			return <AuthAppAdmin />
-		}
+
+	if (currentUser?.role == 'admin') {
+		return <AuthAppAdmin />
+	} else if (currentUser?.role == 'medico') {
+		return <AuthApp />
 	} else {
 		return <NonAuthApp />
 	}
