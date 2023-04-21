@@ -6,7 +6,7 @@
 @import url('https://unicons.iconscout.com/release-pro/v4.0.0/css/solid.css');
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
     font-family: 'Roboto Mono', monospace;
@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 
     background: rgb(5, 190, 205);
-    background: linear-gradient(90deg, rgba(5, 190, 205, 1) 0%, rgba(58, 124, 217, 1) 35%, rgba(121, 45, 231, 1) 100%);
+    background: linear-gradient(90deg, rgba(5, 188, 205, 0.859) 0%, rgba(58, 124, 217, 0.837) 35%, rgba(123, 45, 231, 0.865) 100%);
     background-size: 400% 400%;
     animation: gradient 30s ease infinite;
     height: 100vh;
@@ -65,30 +65,30 @@ h4 {
 }
 
 .card-title {
-    text-transform: uppercase;
-    font-family: 'Bebas Neue', cursive;
+    text-transform: capitalize;
+    font-family: 'Vazirmatn', sans-serif;
     font-size: 60px;
-    letter-spacing: 2px;
-    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
-        0px -4px 10px rgba(83, 81, 81, 0.3);
+}
+
+
+.card-title.diminished {
+    text-transform: capitalize;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 50px;
+
 }
 
 .page-title {
-    text-transform: lowercase;
+    text-transform: capitalize;
     font-weight: bold;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Vazirmatn', sans-serif;
     font-size: 85px;
-    letter-spacing: 2px;
-    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
-        0px -4px 10px rgba(83, 81, 81, 0.3);
 }
 
 h6 span {
     padding: 0 20px;
     text-transform: uppercase;
     font-weight: 700;
-    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
-        0px -4px 10px rgba(83, 81, 81, 0.3);
 }
 
 .section {
@@ -166,7 +166,7 @@ h6 span {
     left: 0;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    transition: all 600ms ease-out;
+    transition: all 1.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .card-front,
@@ -174,7 +174,7 @@ h6 span {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(10, 14, 55, 0.096);
     backdrop-filter: blur(17px);
     -webkit-backdrop-filter: blur(17px);
     border-radius: 10px;
@@ -312,58 +312,58 @@ h6 span {
 
 /* CSS */
 .btn {
-    letter-spacing: 0px;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 500;
     align-items: center;
-    appearance: none;
-    background: transparent;
-    border-width: 0;
-    border-radius: 6px;
-    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    background: rgba(101, 78, 78, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(18, 23, 84, 0.096);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-sizing: border-box;
     color: whitesmoke;
     cursor: pointer;
     display: inline-flex;
+    fill: whitesmoke;
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
     height: 48px;
     justify-content: center;
-    line-height: 1;
-    list-style: none;
-    overflow: hidden;
-    padding-bottom: 16px;
-    padding-top: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    position: relative;
-    text-align: left;
+    letter-spacing: -.8px;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 0 17px;
+    text-align: center;
     text-decoration: none;
-    transition: box-shadow .15s, transform .15s;
+    transition: all .3s;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    white-space: nowrap;
-    will-change: box-shadow, transform;
-    font-size: 20px;
 }
 
 .btn.special {
-    border-width: 1px 1px 0px 1px;
-    border-color: #4968dc;
+    border-color: rgb(239, 242, 246);
+    color: rgb(239, 242, 246);
+    fill: rgb(239, 242, 246);
 }
 
 .btn:focus {
-    box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    color: #171e29;
 }
 
 .btn:hover {
-    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-    transform: translateY(-2px);
+    border-color: rgb(239, 242, 246);
+    color: rgb(239, 242, 246);
+    fill: rgb(239, 242, 246);
 }
 
 .btn:active {
-    box-shadow: #3c4fe0 0 3px 7px inset;
-    transform: translateY(2px);
+    border-color: #06f;
+    color: #06f;
+    fill: #06f;
 }
+
 
 
 
