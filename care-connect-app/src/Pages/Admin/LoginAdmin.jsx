@@ -5,6 +5,9 @@ import { API_URL } from '../../../config'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Link } from 'react-router-dom'
+
 const LoginAdmin = () => {
 	const { login } = useContext(UserContext)
 
@@ -59,7 +62,30 @@ const LoginAdmin = () => {
 			className="d-flex flex-column justify-content-center"
 			style={{ height: '100vh' }}
 		>
-			<h1>Login: Admin</h1>
+			<Link class="btn mt-4 mb-4" style={{ width: 'fit-content' }} to="/">
+				<ArrowBackIcon />
+			</Link>
+
+			<h1 className="page-title">login</h1>
+			<p style={{ marginBottom: '20px' }}>
+				Ingresa como{' '}
+				<span
+					style={{
+						fontSize: '16px',
+					}}
+				>
+					💼
+				</span>{' '}
+				<span
+					style={{
+						fontWeight: 'bold',
+						textDecoration: 'underline',
+					}}
+				>
+					Administrador
+				</span>{' '}
+				a la plataforma.
+			</p>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
 				<Form.Group controlId="formBasicEmail">

@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react'
 import { Container, Form, Button, Alert } from 'react-bootstrap'
 import { API_URL } from '../../config'
 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { Link } from 'react-router-dom'
+
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
@@ -33,16 +36,25 @@ const Login = () => {
 			})
 
 			if (!response.ok) {
-				throw new Error('An error occurred while logging in.')
+				throw new Error(
+					'Ocurrió un error al intentar ingresar. Por favor trata de nuevo.',
+				)
 			}
 			const data = await response.json()
 			console.log({ name: data.nombre, id: data.id, role: data.role })
 			// handle successful response
-			login({ name: data.nombre, id: data.id, role: data.role })
+			login({
+				name: data.nombre,
+				id: data.id,
+				role: data.role,
+				id_instalacion_medica: data.id_instalacion_medica,
+			})
 			navigate('/')
 		} catch (error) {
 			console.error(error)
-			setError('An error occurred while logging in. Please try again.')
+			setError(
+				'Ocurrió un error al intentar ingresar. Por favor trata de nuevo.',
+			)
 		}
 	}
 
@@ -51,14 +63,37 @@ const Login = () => {
 			className="d-flex flex-column justify-content-center"
 			style={{ height: '100vh' }}
 		>
-			<h1>Login: Doctor</h1>
+			<Link class="btn mt-4 mb-4" style={{ width: 'fit-content' }} to="/">
+				<ArrowBackIcon />
+			</Link>
+
+			<h1 className="page-title">login</h1>
+			<p style={{ marginBottom: '20px' }}>
+				Ingresa como{' '}
+				<span
+					style={{
+						fontSize: '16px',
+					}}
+				>
+					👨‍⚕️
+				</span>{' '}
+				<span
+					style={{
+						fontWeight: 'bold',
+						textDecoration: 'underline',
+					}}
+				>
+					Doctor
+				</span>{' '}
+				a la plataforma.
+			</p>
 			{error && <Alert variant="danger">{error}</Alert>}
 			<Form onSubmit={handleSubmit}>
 				<Form.Group controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
+					<Form.Label>Correo electrónico</Form.Label>
 					<Form.Control
 						type="email"
-						placeholder="Enter email"
+						placeholder="Ingresa tu correo electrónico..."
 						value={email}
 						onChange={(event) => setEmail(event.target.value)}
 						required
@@ -66,10 +101,10 @@ const Login = () => {
 				</Form.Group>
 
 				<Form.Group controlId="formBasicPassword">
-					<Form.Label>Password</Form.Label>
+					<Form.Label>Contraseña</Form.Label>
 					<Form.Control
 						type="password"
-						placeholder="Password"
+						placeholder="Ingresa tu contraseña..."
 						value={password}
 						onChange={(event) => setPassword(event.target.value)}
 						required
