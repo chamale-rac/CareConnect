@@ -14,22 +14,21 @@ import '../App.css'
 function Home() {
 	const { currentUser } = useContext(UserContext)
 	const navigate = useNavigate()
-	
 
-	const consultations = [
-		{
-			fecha: '2021-09-01',
-			unidad: 'A',
-			paciente: 'Johan Liebert',
-			prioridad: 'Alta',
-		},
-		{
-			fecha: '2021-09-02',
-			unidad: 'B',
-			paciente: 'Johnny Joestar',
-			prioridad: 'Baja',
-		},
-	]
+    const consultations = [
+        {
+            fecha: "2021-09-01",
+            unidad: "A",
+            paciente: "Johan Liebert",
+            prioridad: "Alta",
+        },
+        {
+            fecha: "2021-09-02",
+            unidad: "B",
+            paciente: "Johnny Joestar",
+            prioridad: "Baja",
+        },
+    ];
 
 
 	const [currentUserInfo, setCurrentUserInfo] = useState({})
@@ -63,7 +62,7 @@ function Home() {
 		fetchMedic()
 	}, [])
 
-	/*
+    /*
     const currentUser = {
         nombre: "Michio Kaku",
         unidad: "The Care",
@@ -189,4 +188,4 @@ function Home() {
 	)
 }
 
-export default Home
+export default Home;

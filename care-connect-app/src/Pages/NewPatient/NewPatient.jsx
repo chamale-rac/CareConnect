@@ -15,7 +15,6 @@ export function NewPatient(props) {
 
     return (
         <>
-            <CustomNavbar />
             <div className="patient-container container mt-4">
                 <Button variant="secondary " onClick={handleBackClick}>
                     <ArrowBackIcon />

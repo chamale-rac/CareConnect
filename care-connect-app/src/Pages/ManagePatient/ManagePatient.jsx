@@ -10,34 +10,33 @@ import {
   } from "@mui/material";
 import './ManagePatient.css'
 
+
 export function ManagePatient() {
-	const navigate = useNavigate()
-	const handleBackClick = () => {
-		navigate('/home')
-	}
+    const navigate = useNavigate();
+    const handleBackClick = () => {
+        navigate("/");
+    };
 
-	const [selectedPatient, setSelectedPatient] = useState(null)
-	const [infoSelected, setInfoSelected] = useState()
-	const [searchTerm, setSearchTerm] = useState('')
-	const [searchResults, setSearchResults] = useState([])
+    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [infoSelected, setInfoSelected] = useState();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
-	const handleInputChange = (event) => {
-		setSearchTerm(event.target.value)
-	}
+    const handleInputChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
-	const handleSearchClick = () => {
-		fetch(`${API_URL}/buscar_paciente?search=${searchTerm}`)
-			.then((response) => response.json())
-			.then((pacientes) => {
-				setInfoSelected(null)
-				setSelectedPatient(null)
-				setSearchResults(pacientes)
-			})
-	}
+    const handleSearchClick = () => {
+        fetch(`${API_URL}/buscar_paciente?search=${searchTerm}`)
+            .then((response) => response.json())
+            .then((pacientes) => {
+                setInfoSelected(null);
+                setSelectedPatient(null);
+                setSearchResults(pacientes);
+            });
+    };
 
-
-
-	console.log(selectedPatient)
+    console.log(selectedPatient);
 
 	return (
 		<>
